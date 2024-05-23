@@ -12,14 +12,14 @@ from agent import Agent, Policy
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--n-episodes', default=100000, type=int, help='Number of training episodes')
-    parser.add_argument('--print-every', default=20000, type=int, help='Print info every <> episodes')
-    parser.add_argument('--device', default='cpu', type=str, help='network device [cpu, cuda]')
+    parser.add_argument('--n-episodes', default=25000, type=int, help='Number of training episodes')
+    parser.add_argument('--print-every', default=500, type=int, help='Print info every <> episodes')
+    parser.add_argument('--device', default='cuda', type=str, help='network device [cpu, cuda]')
 
     return parser.parse_args()
 
 args = parse_args()
-
+#render = True
 
 def main():
 
@@ -39,11 +39,11 @@ def main():
 
 	policy = Policy(observation_space_dim, action_space_dim)
 	agent = Agent(policy, device=args.device)
-
+	print(f'The following network is initialized: \n{policy}')
+ 
     #
     # TASK 2 and 3: interleave data collection to policy updates
     #
-
 	for episode in range(args.n_episodes):
 		done = False
 		train_reward = 0
@@ -55,17 +55,22 @@ def main():
 			previous_state = state
 
 			state, reward, done, info = env.step(action.detach().cpu().numpy())
-
+			
 			agent.store_outcome(previous_state, state, action_probabilities, reward, done)
 
 			train_reward += reward
-		
+
+			if episode>20000:
+				env.render()
+
+		agent.update_policy()
+  
 		if (episode+1)%args.print_every == 0:
 			print('Training episode:', episode)
 			print('Episode return:', train_reward)
 
 
-	torch.save(agent.policy.state_dict(), "model.mdl")
+	torch.save(agent.policy.state_dict(), "REINFORCE.mdl")
 
 	
 

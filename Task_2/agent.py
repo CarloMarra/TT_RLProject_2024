@@ -28,7 +28,7 @@ class Policy(torch.nn.Module):
         self.fc2_actor = torch.nn.Linear(self.hidden, self.hidden)
         self.fc3_actor_mean = torch.nn.Linear(self.hidden, action_space)
         
-        # Learned standard deviation for exploration at training time 
+        # Learned standard deviation for exploration at training time
         self.sigma_activation = F.softplus
         init_sigma = 0.5
         self.sigma = torch.nn.Parameter(torch.zeros(self.action_space)+init_sigma)
@@ -39,7 +39,7 @@ class Policy(torch.nn.Module):
         """
         # TASK 3: critic network for actor-critic algorithm
 
-
+        
         self.init_weights()
 
 
@@ -94,21 +94,30 @@ class Agent(object):
 
         self.states, self.next_states, self.action_log_probs, self.rewards, self.done = [], [], [], [], []
 
-        #
         # TASK 2:
         #   - compute discounted returns
         #   - compute policy gradient loss function given actions and returns
         #   - compute gradients and step the optimizer
-        #
+         
+        discounted_rewards = discount_rewards(rewards, self.gamma)
+        
+        baseline = 20.0
+        advantages = discounted_rewards - baseline
+        policy_loss = -torch.sum(action_log_probs * advantages)
+        #policy_loss = -torch.sum(action_log_probs * discounted_rewards)
+        
+        self.optimizer.zero_grad()
+        policy_loss.backward()
+        self.optimizer.step()
 
 
-        #
+        
         # TASK 3:
         #   - compute boostrapped discounted return estimates
         #   - compute advantage terms
         #   - compute actor loss and critic loss
         #   - compute gradients and step the optimizer
-        #
+        
 
         return        
 
