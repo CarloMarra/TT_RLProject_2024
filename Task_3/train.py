@@ -12,8 +12,8 @@ from agent import Agent, Policy
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--n-episodes', default=5000, type=int, help='Number of training episodes')
-    parser.add_argument('--print-every', default=500, type=int, help='Print info every <> episodes')
+    parser.add_argument('--n-episodes', default=15000, type=int, help='Number of training episodes')
+    parser.add_argument('--print-every', default=50, type=int, help='Print info every <> episodes')
     parser.add_argument('--device', default='cuda', type=str, help='network device [cpu, cuda]')
 
     return parser.parse_args()
@@ -42,7 +42,7 @@ def main():
 	print(f'The following network is initialized: \n{policy}')
  
     #
-    # TASK 2: interleave data collection to policy updates
+    # TASK 2 and 3: interleave data collection to policy updates
     #
 	for episode in range(args.n_episodes):
 		done = False
@@ -55,11 +55,13 @@ def main():
 			previous_state = state
 
 			state, reward, done, info = env.step(action.detach().cpu().numpy())
-			
-			agent.store_outcome(previous_state, state, action_probabilities, reward, done)
+
+			agent.store_outcome(previous_state, action, state, action_probabilities, reward, done)
 
 			train_reward += reward
 
+			if episode>12500:
+				env.render()
 
 		agent.update_policy()
   
@@ -68,8 +70,9 @@ def main():
 			print('Episode return:', train_reward)
 
 
-	torch.save(agent.policy.state_dict(), "/Task_2/REINFORCE.mdl")
+	torch.save(agent.policy.state_dict(), "/Task_3/Actor_Critic.mdl")
 
+	
 
 if __name__ == '__main__':
 	main()

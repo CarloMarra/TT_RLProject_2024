@@ -33,6 +33,16 @@ class Policy(torch.nn.Module):
         init_sigma = 0.5
         self.sigma = torch.nn.Parameter(torch.zeros(self.action_space)+init_sigma)
 
+
+        """
+            Critic network
+        """
+        # TASK 3: critic network for actor-critic algorithm
+        self.fc1_critic = torch.nn.Linear(state_space + action_space, self.hidden)
+        self.fc2_critic = torch.nn.Linear(self.hidden, self.hidden)
+        self.fc3_critic_value = torch.nn.Linear(self.hidden, 1)
+
+        
         self.init_weights()
 
 
@@ -43,22 +53,33 @@ class Policy(torch.nn.Module):
                 torch.nn.init.zeros_(m.bias)
 
 
-    def forward(self, x):
+    def forward(self, x_state, x_action=None):
         """
             Actor
         """
-        x_actor = self.tanh(self.fc1_actor(x))
+        x_actor = self.tanh(self.fc1_actor(x_state))
         x_actor = self.tanh(self.fc2_actor(x_actor))
         action_mean = self.fc3_actor_mean(x_actor)
 
         sigma = self.sigma_activation(self.sigma)
         normal_dist = Normal(action_mean, sigma)
 
-        return normal_dist
+         # TASK 3: forward in the critic network
+        if x_action is None:
+            return normal_dist
+        else:
+            """
+                Critic
+            """
+            x_state_action = torch.cat([x_state, x_action], dim=-1)
+            x_state_action = self.tanh(self.fc1_critic(x_state_action))
+            x_state_action = self.tanh(self.fc2_critic(x_state_action))
+            q_value = self.fc3_critic_value(x_state_action)
+            return normal_dist, q_value
 
 
 class Agent(object):
-    def __init__(self, policy, device='cpu'):
+    def __init__(self, policy, device='cuda'):
         self.train_device = device
         self.policy = policy.to(self.train_device)
         self.optimizer = torch.optim.Adam(policy.parameters(), lr=1e-3)
@@ -66,33 +87,55 @@ class Agent(object):
         self.gamma = 0.99
         self.states = []
         self.next_states = []
+        self.actions = []
         self.action_log_probs = []
         self.rewards = []
         self.done = []
 
+
     def update_policy(self):
         action_log_probs = torch.stack(self.action_log_probs, dim=0).to(self.train_device).squeeze(-1)
         states = torch.stack(self.states, dim=0).to(self.train_device).squeeze(-1)
+        actions = torch.stack(self.actions, dim=0).to(self.train_device).squeeze(-1)
         next_states = torch.stack(self.next_states, dim=0).to(self.train_device).squeeze(-1)
         rewards = torch.stack(self.rewards, dim=0).to(self.train_device).squeeze(-1)
         done = torch.Tensor(self.done).to(self.train_device)
 
-        self.states, self.next_states, self.action_log_probs, self.rewards, self.done = [], [], [], [], []
-
-        # TASK 2:
-        #   - compute discounted returns
-        #   - compute policy gradient loss function given actions and returns
+        self.states, self.actions, self.next_states, self.action_log_probs, self.rewards, self.done = [], [], [], [], [], []
+        
+        # TASK 3:
+        #   - compute boostrapped discounted return estimates
+        #   - compute advantage terms
+        #   - compute actor loss and critic loss
         #   - compute gradients and step the optimizer
-         
-        discounted_rewards = discount_rewards(rewards, self.gamma)
         
-        baseline = 20.0
-        advantages = discounted_rewards - baseline
+        _ , state_action_values = self.policy(states, actions)
+        state_action_values = state_action_values.view(-1, 1)  # Ensure shape is [batch_size, 1]
+
+        with torch.no_grad():
+            next_actions_distr = self.policy(next_states)
+            next_actions = next_actions_distr.mean
+            _, next_state_values = self.policy(next_states, next_actions)
+            next_state_values = next_state_values.view(-1) * (1 - done)  # Zero out values for terminal states
+        
+        # Compute target Q-values [from Bellman's equations]
+        target_values = rewards + self.gamma * next_state_values
+        target_values = target_values.view(-1, 1)  # Ensure shape is [batch_size, 1]
+
+        # Compute advantages
+        advantages = target_values - state_action_values
+        
+        # Compute loss
         policy_loss = -torch.sum(action_log_probs * advantages)
-        #policy_loss = -torch.sum(action_log_probs * discounted_rewards)
         
+        # Compute critic loss
+        critic_loss = F.mse_loss(state_action_values, target_values)
+        
+        # Total loss
+        loss = policy_loss + critic_loss
+    
         self.optimizer.zero_grad()
-        policy_loss.backward()
+        loss.backward()
         self.optimizer.step()
 
         return        
@@ -116,8 +159,9 @@ class Agent(object):
             return action, action_log_prob
 
 
-    def store_outcome(self, state, next_state, action_log_prob, reward, done):
+    def store_outcome(self, state, action, next_state, action_log_prob, reward, done):
         self.states.append(torch.from_numpy(state).float())
+        self.actions.append(action)
         self.next_states.append(torch.from_numpy(next_state).float())
         self.action_log_probs.append(action_log_prob)
         self.rewards.append(torch.Tensor([reward]))

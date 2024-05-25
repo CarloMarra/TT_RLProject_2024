@@ -12,7 +12,7 @@ from agent import Agent, Policy
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--n-episodes', default=5000, type=int, help='Number of training episodes')
+    parser.add_argument('--n-episodes', default=25000, type=int, help='Number of training episodes')
     parser.add_argument('--print-every', default=500, type=int, help='Print info every <> episodes')
     parser.add_argument('--device', default='cuda', type=str, help='network device [cpu, cuda]')
 
@@ -42,7 +42,7 @@ def main():
 	print(f'The following network is initialized: \n{policy}')
  
     #
-    # TASK 2: interleave data collection to policy updates
+    # TASK 2 and 3: interleave data collection to policy updates
     #
 	for episode in range(args.n_episodes):
 		done = False
@@ -60,6 +60,8 @@ def main():
 
 			train_reward += reward
 
+			if episode>20000:
+				env.render()
 
 		agent.update_policy()
   
@@ -68,8 +70,9 @@ def main():
 			print('Episode return:', train_reward)
 
 
-	torch.save(agent.policy.state_dict(), "/Task_2/REINFORCE.mdl")
+	torch.save(agent.policy.state_dict(), "REINFORCE.mdl")
 
+	
 
 if __name__ == '__main__':
 	main()
