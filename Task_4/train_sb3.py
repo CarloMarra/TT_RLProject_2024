@@ -1,22 +1,38 @@
-"""Sample script for training a control policy on the Hopper environment
-   using stable-baselines3 (https://stable-baselines3.readthedocs.io/en/master/)
-
-    Read the stable-baselines3 documentation and implement a training
-    pipeline with an RL algorithm of your choice between PPO and SAC.
-"""
 import gym
-from env.custom_hopper import *
+import time
+import csv
+
+from stable_baselines3 import PPO
+from stable_baselines3.common.env_util import make_vec_env
+from stable_baselines3.common.logger import configure
+from stable_baselines3.common.callbacks import StopTrainingOnMaxEpisodes
+from stable_baselines3.common.callbacks import ProgressBarCallback
+
+from env.custom_hopper import CustomHopper
+
 
 def main():
-    train_env = gym.make('CustomHopper-source-v0')
+    #n_envs = 4
+    vec_env = make_vec_env('CustomHopper-source-v0', n_envs=4)
+    #env = make_env()
 
-    print('State space:', train_env.observation_space)  # state-space
-    print('Action space:', train_env.action_space)  # action-space
-    print('Dynamics parameters:', train_env.get_parameters())  # masses of each link of the Hopper
+    tmp_path = "/home/ale/TT_RLProject_2024/Task_4/"
+    #set up logger
+    new_logger = configure(tmp_path, ["csv"])
 
-    #
-    # TASK 4 & 5: train and test policies on the Hopper env with stable-baselines3
-    #
+    model = PPO("MlpPolicy", learning_rate=0.0003, env=vec_env, verbose=1)
+    #Set new logger
+    model.set_logger(new_logger)
+    
+    #custom_callback = CustomCallback()
+    #stop_training_callback = StopTrainingOnMaxEpisodes(max_episodes=5000, verbose=1)
+
+    # Combine the callbacks
+    #callback = CallbackList([custom_callback, stop_training_callback])
+    
+    # Use a very large number of timesteps to ensure the callback determines stopping
+    model.learn(total_timesteps=int(1000000), progress_bar=True)
+    model.save("/home/ale/TT_RLProject_2024/Task_4/ppo_Hopper_v0_default")
 
 if __name__ == '__main__':
     main()

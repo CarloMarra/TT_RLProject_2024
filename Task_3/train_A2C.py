@@ -5,12 +5,12 @@ import torch
 import gym
 
 from env.custom_hopper import *
-from Task_3.agent import Agent, Actor, Critic
+from Task_3.agent2_A2C import Agent, Actor, Critic
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--n-episodes', default=1000, type=int, help='Number of training episodes')
-    parser.add_argument('--print-every', default=500, type=int, help='Print info every <> episodes')
+    parser.add_argument('--n-episodes', default=2000, type=int, help='Number of training episodes')
+    parser.add_argument('--print-every', default=300, type=int, help='Print info every <> episodes')
     parser.add_argument('--device', default='cuda', type=str, help='network device [cpu, cuda]')
 
     return parser.parse_args()
@@ -31,13 +31,13 @@ def main():
     action_space_dim = env.action_space.shape[-1]
 
     policy = Actor(observation_space_dim, action_space_dim)
-    val_func = Critic(observation_space_dim, action_space_dim)
+    val_func = Critic(observation_space_dim)
     agent = Agent(policy, val_func, device=args.device)
 
     print(f'The following network is initialized: \n{policy}')
 
     # Open CSV file and write header
-    with open('/home/ale/TT_RLProject_2024/Task_3/A2C_training_logs.csv', 'w', newline='') as csvfile:
+    with open('/home/ale/TT_RLProject_2024/Task_3/A2C_training_logs_agent2.csv', 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(['Episode', 'Train Reward', 'Episode Duration'])
 
@@ -70,7 +70,7 @@ def main():
         episode_duration = episode_end_time - episode_start_time
 
         # Append episode result to CSV file
-        with open('/home/ale/TT_RLProject_2024/Task_3/A2C_training_logs.csv', 'a', newline='') as csvfile:
+        with open('/home/ale/TT_RLProject_2024/Task_3/A2C_training_logs_agent2.csv', 'a', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow([episode + 1, train_reward, episode_duration])
 

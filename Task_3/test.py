@@ -4,7 +4,7 @@ import torch
 import gym
 
 from env.custom_hopper import *
-from agent import Agent, Actor, Critic
+from Task_3.agent2_A2C import Agent, Actor, Critic
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -30,7 +30,7 @@ def main():
     action_space_dim = env.action_space.shape[-1]
 
     policy = Actor(observation_space_dim, action_space_dim)
-    val_func = Critic(observation_space_dim, action_space_dim)
+    val_func = Critic(observation_space_dim)
     policy.load_state_dict(torch.load(args.model), strict=True)
     agent = Agent(policy, val_func, device=args.device)
 

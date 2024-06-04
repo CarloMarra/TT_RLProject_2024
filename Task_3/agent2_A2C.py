@@ -10,6 +10,7 @@ class Actor(torch.nn.Module):
         self.action_space = action_space
         self.hidden = 64
         self.tanh = torch.nn.Tanh()
+        
 
         self.fc1_actor = torch.nn.Linear(state_space, self.hidden)
         self.fc2_actor = torch.nn.Linear(self.hidden, self.hidden)
@@ -83,6 +84,7 @@ class Agent(object):
         self.action_log_probs = []
         self.rewards = []
         self.done = []
+        self.entropy_coef = 0.1
 
     def update_policy(self):
         
@@ -99,6 +101,12 @@ class Agent(object):
         # Compute state values from critic
         values = self.critic(states).squeeze(-1)
         
+        # Compute the action distributio
+        normal_dist = self.actor(states)
+        
+        # Calculate entropy
+        entropy = normal_dist.entropy().mean()
+        
         next_values = self.critic(next_states).squeeze(-1)
 
         # Compute target values using Bellman equation
@@ -107,11 +115,14 @@ class Agent(object):
         # Compute advantage
         advantages = target_values - values
 
+        # Normalize the advantages
+        #advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+        
         # Compute critic loss
         critic_loss = torch.mean((advantages) ** 2)
 
         # Compute actor loss
-        actor_loss = -torch.mean(action_log_probs * advantages.detach())
+        actor_loss = -torch.mean(action_log_probs * advantages.detach()) - self.entropy_coef * entropy
 
         # Update actor network
         self.optimizerA.zero_grad()
@@ -128,7 +139,7 @@ class Agent(object):
         x = torch.from_numpy(state).float().to(self.train_device)
 
         normal_dist = self.actor(x)
-
+        
         if evaluation:  # Return mean
             return normal_dist.mean, None
 

@@ -1,4 +1,4 @@
-```markdown
+
 ### Mathematical Explanation of Entropy
 
 In the context of probability and information theory, entropy is a measure of the uncertainty or randomness in a probability distribution. For a discrete random variable $X$ with possible outcomes $x_1, x_2, \ldots, x_n$ and corresponding probabilities $P(X = x_i) = p_i$, the entropy $H(X)$ is defined as:

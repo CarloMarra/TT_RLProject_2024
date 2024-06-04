@@ -1,153 +1,208 @@
-import numpy as np
-import torch
-import torch.nn.functional as F
-from torch.distributions import Normal
+from typing import Any, ClassVar, Dict, Optional, Type, TypeVar, Union
 
-class Actor(torch.nn.Module):
-    def __init__(self, state_space, action_space):
-        super().__init__()
-        self.state_space = state_space
-        self.action_space = action_space
-        self.hidden = 64
-        self.tanh = torch.nn.Tanh()
+import torch as th
+from gymnasium import spaces
+from torch.nn import functional as F
 
-        self.fc1_actor = torch.nn.Linear(state_space, self.hidden)
-        self.fc2_actor = torch.nn.Linear(self.hidden, self.hidden)
-        self.fc3_actor_mean = torch.nn.Linear(self.hidden, action_space)
-        
-        # Learned standard deviation for exploration at training time
-        self.sigma_activation = F.softplus
-        init_sigma = 0.5
-        self.sigma = torch.nn.Parameter(torch.zeros(self.action_space) + init_sigma)
+from stable_baselines3.common.buffers import RolloutBuffer
+from stable_baselines3.common.on_policy_algorithm import OnPolicyAlgorithm
+from stable_baselines3.common.policies import ActorCriticCnnPolicy, ActorCriticPolicy, BasePolicy, MultiInputActorCriticPolicy
+from stable_baselines3.common.type_aliases import GymEnv, MaybeCallback, Schedule
+from stable_baselines3.common.utils import explained_variance
 
-        self.init_weights()
+SelfA2C = TypeVar("SelfA2C", bound="A2C")
 
-    def init_weights(self):
-        for m in self.modules():
-            if isinstance(m, torch.nn.Linear):
-                torch.nn.init.normal_(m.weight)
-                torch.nn.init.zeros_(m.bias)
 
-    def forward(self, x_state):
+class A2C(OnPolicyAlgorithm):
+    """
+    Advantage Actor Critic (A2C)
+
+    Paper: https://arxiv.org/abs/1602.01783
+    Code: This implementation borrows code from https://github.com/ikostrikov/pytorch-a2c-ppo-acktr-gail and
+    and Stable Baselines (https://github.com/hill-a/stable-baselines)
+
+    Introduction to A2C: https://hackernoon.com/intuitive-rl-intro-to-advantage-actor-critic-a2c-4ff545978752
+
+    :param policy: The policy model to use (MlpPolicy, CnnPolicy, ...)
+    :param env: The environment to learn from (if registered in Gym, can be str)
+    :param learning_rate: The learning rate, it can be a function
+        of the current progress remaining (from 1 to 0)
+    :param n_steps: The number of steps to run for each environment per update
+        (i.e. batch size is n_steps * n_env where n_env is number of environment copies running in parallel)
+    :param gamma: Discount factor
+    :param gae_lambda: Factor for trade-off of bias vs variance for Generalized Advantage Estimator.
+        Equivalent to classic advantage when set to 1.
+    :param ent_coef: Entropy coefficient for the loss calculation
+    :param vf_coef: Value function coefficient for the loss calculation
+    :param max_grad_norm: The maximum value for the gradient clipping
+    :param rms_prop_eps: RMSProp epsilon. It stabilizes square root computation in denominator
+        of RMSProp update
+    :param use_rms_prop: Whether to use RMSprop (default) or Adam as optimizer
+    :param use_sde: Whether to use generalized State Dependent Exploration (gSDE)
+        instead of action noise exploration (default: False)
+    :param sde_sample_freq: Sample a new noise matrix every n steps when using gSDE
+        Default: -1 (only sample at the beginning of the rollout)
+    :param rollout_buffer_class: Rollout buffer class to use. If ``None``, it will be automatically selected.
+    :param rollout_buffer_kwargs: Keyword arguments to pass to the rollout buffer on creation.
+    :param normalize_advantage: Whether to normalize or not the advantage
+    :param stats_window_size: Window size for the rollout logging, specifying the number of episodes to average
+        the reported success rate, mean episode length, and mean reward over
+    :param tensorboard_log: the log location for tensorboard (if None, no logging)
+    :param policy_kwargs: additional arguments to be passed to the policy on creation
+    :param verbose: Verbosity level: 0 for no output, 1 for info messages (such as device or wrappers used), 2 for
+        debug messages
+    :param seed: Seed for the pseudo random generators
+    :param device: Device (cpu, cuda, ...) on which the code should be run.
+        Setting it to auto, the code will be run on the GPU if possible.
+    :param _init_setup_model: Whether or not to build the network at the creation of the instance
+    """
+
+    policy_aliases: ClassVar[Dict[str, Type[BasePolicy]]] = {
+        "MlpPolicy": ActorCriticPolicy,
+        "CnnPolicy": ActorCriticCnnPolicy,
+        "MultiInputPolicy": MultiInputActorCriticPolicy,
+    }
+
+    def __init__(
+        self,
+        policy: Union[str, Type[ActorCriticPolicy]],
+        env: Union[GymEnv, str],
+        learning_rate: Union[float, Schedule] = 7e-4,
+        n_steps: int = 5,
+        gamma: float = 0.99,
+        gae_lambda: float = 1.0,
+        ent_coef: float = 0.0,
+        vf_coef: float = 0.5,
+        max_grad_norm: float = 0.5,
+        rms_prop_eps: float = 1e-5,
+        use_rms_prop: bool = True,
+        use_sde: bool = False,
+        sde_sample_freq: int = -1,
+        rollout_buffer_class: Optional[Type[RolloutBuffer]] = None,
+        rollout_buffer_kwargs: Optional[Dict[str, Any]] = None,
+        normalize_advantage: bool = False,
+        stats_window_size: int = 100,
+        tensorboard_log: Optional[str] = None,
+        policy_kwargs: Optional[Dict[str, Any]] = None,
+        verbose: int = 0,
+        seed: Optional[int] = None,
+        device: Union[th.device, str] = "auto",
+        _init_setup_model: bool = True,
+    ):
+        super().__init__(
+            policy,
+            env,
+            learning_rate=learning_rate,
+            n_steps=n_steps,
+            gamma=gamma,
+            gae_lambda=gae_lambda,
+            ent_coef=ent_coef,
+            vf_coef=vf_coef,
+            max_grad_norm=max_grad_norm,
+            use_sde=use_sde,
+            sde_sample_freq=sde_sample_freq,
+            rollout_buffer_class=rollout_buffer_class,
+            rollout_buffer_kwargs=rollout_buffer_kwargs,
+            stats_window_size=stats_window_size,
+            tensorboard_log=tensorboard_log,
+            policy_kwargs=policy_kwargs,
+            verbose=verbose,
+            device=device,
+            seed=seed,
+            _init_setup_model=False,
+            supported_action_spaces=(
+                spaces.Box,
+                spaces.Discrete,
+                spaces.MultiDiscrete,
+                spaces.MultiBinary,
+            ),
+        )
+
+        self.normalize_advantage = normalize_advantage
+
+        # Update optimizer inside the policy if we want to use RMSProp
+        # (original implementation) rather than Adam
+        if use_rms_prop and "optimizer_class" not in self.policy_kwargs:
+            self.policy_kwargs["optimizer_class"] = th.optim.RMSprop
+            self.policy_kwargs["optimizer_kwargs"] = dict(alpha=0.99, eps=rms_prop_eps, weight_decay=0)
+
+        if _init_setup_model:
+            self._setup_model()
+
+    def train(self) -> None:
         """
-            Actor forward pass
+        Update policy using the currently gathered
+        rollout buffer (one gradient step over whole data).
         """
-        x_actor = self.tanh(self.fc1_actor(x_state))
-        x_actor = self.tanh(self.fc2_actor(x_actor))
-        action_mean = self.fc3_actor_mean(x_actor)
+        # Switch to train mode (this affects batch norm / dropout)
+        self.policy.set_training_mode(True)
 
-        sigma = self.sigma_activation(self.sigma)
-        normal_dist = Normal(action_mean, sigma)
-        return normal_dist
+        # Update optimizer learning rate
+        self._update_learning_rate(self.policy.optimizer)
 
-class Critic(torch.nn.Module):
-    def __init__(self, state_space, action_space):
-        super().__init__()
-        self.state_space = state_space
-        self.action_space = action_space
-        self.hidden = 64
-        self.tanh = torch.nn.Tanh()
+        # This will only loop once (get all data in one go)
+        for rollout_data in self.rollout_buffer.get(batch_size=None):
+            actions = rollout_data.actions
+            if isinstance(self.action_space, spaces.Discrete):
+                # Convert discrete action from float to long
+                actions = actions.long().flatten()
 
-        self.fc1_critic = torch.nn.Linear(state_space + action_space, self.hidden)
-        self.fc2_critic = torch.nn.Linear(self.hidden, self.hidden)
-        self.fc3_critic_value = torch.nn.Linear(self.hidden, 1)
+            values, log_prob, entropy = self.policy.evaluate_actions(rollout_data.observations, actions)
+            values = values.flatten()
 
-        self.init_weights()
+            # Normalize advantage (not present in the original implementation)
+            advantages = rollout_data.advantages
+            if self.normalize_advantage:
+                advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
 
-    def init_weights(self):
-        for m in self.modules():
-            if isinstance(m, torch.nn.Linear):
-                torch.nn.init.normal_(m.weight)
-                torch.nn.init.zeros_(m.bias)
+            # Policy gradient loss
+            policy_loss = -(advantages * log_prob).mean()
 
-    def forward(self, x_state, x_action):
-        """
-            Critic forward pass
-        """
-        x_state_action = torch.cat([x_state, x_action], dim=-1)
-        x_state_action = self.tanh(self.fc1_critic(x_state_action))
-        x_state_action = self.tanh(self.fc2_critic(x_state_action))
-        q_value = self.fc3_critic_value(x_state_action)
-        return q_value
+            # Value loss using the TD(gae_lambda) target
+            value_loss = F.mse_loss(rollout_data.returns, values)
 
-class Agent(object):
-    
-    def __init__(self, actor, critic, device='cuda'):
-        self.train_device = device
-        self.actor = actor.to(self.train_device)
-        self.critic = critic.to(self.train_device)
-        self.optimizerA = torch.optim.Adam(actor.parameters(), lr=1e-3)
-        self.optimizerC = torch.optim.Adam(critic.parameters(), lr=1e-3)
-        self.gamma = 0.99
-        self.states = []
-        self.next_states = []
-        self.actions = []
-        self.action_log_probs = []
-        self.rewards = []
-        self.done = []
+            # Entropy loss favor exploration
+            if entropy is None:
+                # Approximate entropy when no analytical form
+                entropy_loss = -th.mean(-log_prob)
+            else:
+                entropy_loss = -th.mean(entropy)
 
-    def update_policy(self):
-        
-        action_log_probs = torch.stack(self.action_log_probs, dim=0).to(self.train_device).squeeze(-1)
-        states = torch.stack(self.states, dim=0).to(self.train_device).squeeze(-1)
-        actions = torch.stack(self.actions, dim=0).to(self.train_device).squeeze(-1)
-        next_states = torch.stack(self.next_states, dim=0).to(self.train_device).squeeze(-1)
-        rewards = torch.stack(self.rewards, dim=0).to(self.train_device).squeeze(-1)
-        done = torch.Tensor(self.done).to(self.train_device)
-        
-        # Clear buffers
-        self.states, self.actions, self.next_states, self.action_log_probs, self.rewards, self.done = [], [], [], [], [], []
+            loss = policy_loss + self.ent_coef * entropy_loss + self.vf_coef * value_loss
 
-        # Compute state-action values from critic
-        q_values = self.critic(states, actions).squeeze(-1)
-        
-        next_actions = self.actor(next_states).sample()
-        
-        next_q_values = self.critic(next_states, next_actions).squeeze(-1)
+            # Optimization step
+            self.policy.optimizer.zero_grad()
+            loss.backward()
 
-        # Compute target Q values using Bellman equation
-        target_q_values = rewards + self.gamma * next_q_values * (1 - done)
+            # Clip grad norm
+            th.nn.utils.clip_grad_norm_(self.policy.parameters(), self.max_grad_norm)
+            self.policy.optimizer.step()
 
-        # Compute advantage
-        advantages = target_q_values - q_values
+        explained_var = explained_variance(self.rollout_buffer.values.flatten(), self.rollout_buffer.returns.flatten())
 
-        # Compute critic loss
-        critic_loss = torch.mean((advantages) ** 2)
+        self._n_updates += 1
+        self.logger.record("train/n_updates", self._n_updates, exclude="tensorboard")
+        self.logger.record("train/explained_variance", explained_var)
+        self.logger.record("train/entropy_loss", entropy_loss.item())
+        self.logger.record("train/policy_loss", policy_loss.item())
+        self.logger.record("train/value_loss", value_loss.item())
+        if hasattr(self.policy, "log_std"):
+            self.logger.record("train/std", th.exp(self.policy.log_std).mean().item())
 
-        # Compute actor loss
-        actor_loss = -torch.mean(action_log_probs * advantages.detach())
-
-        # Update actor network
-        self.optimizerA.zero_grad()
-        actor_loss.backward()
-        self.optimizerA.step()
-
-        # Update critic network
-        self.optimizerC.zero_grad()
-        critic_loss.backward()
-        self.optimizerC.step()
-        
-    def get_action(self, state, evaluation=False):
-        """ state -> action (3-d), action_log_densities """
-        x = torch.from_numpy(state).float().to(self.train_device)
-
-        normal_dist = self.actor(x)
-
-        if evaluation:  # Return mean
-            return normal_dist.mean, None
-
-        else:   # Sample from the distribution
-            action = normal_dist.sample()
-
-            # Compute Log probability of the action
-            action_log_prob = normal_dist.log_prob(action).sum()
-
-            return action, action_log_prob
-
-    def store_outcome(self, state, action, next_state, action_log_prob, reward, done):
-        self.states.append(torch.from_numpy(state).float())
-        self.actions.append(action)
-        self.next_states.append(torch.from_numpy(next_state).float())
-        self.action_log_probs.append(action_log_prob)
-        self.rewards.append(torch.Tensor([reward]))
-        self.done.append(done)
+    def learn(
+        self: SelfA2C,
+        total_timesteps: int,
+        callback: MaybeCallback = None,
+        log_interval: int = 100,
+        tb_log_name: str = "A2C",
+        reset_num_timesteps: bool = True,
+        progress_bar: bool = False,
+    ) -> SelfA2C:
+        return super().learn(
+            total_timesteps=total_timesteps,
+            callback=callback,
+            log_interval=log_interval,
+            tb_log_name=tb_log_name,
+            reset_num_timesteps=reset_num_timesteps,
+            progress_bar=progress_bar,
+        )
