@@ -5,13 +5,20 @@ from torch.distributions import Normal
 
 class Actor(torch.nn.Module):
     def __init__(self, state_space, action_space):
+        """
+        Initialize the Actor network.
+
+        Args:
+            state_space (int): Dimension of the state space.
+            action_space (int): Dimension of the action space.
+        """
         super().__init__()
         self.state_space = state_space
         self.action_space = action_space
         self.hidden = 64
         self.tanh = torch.nn.Tanh()
-        
 
+        # Actor network layers
         self.fc1_actor = torch.nn.Linear(state_space, self.hidden)
         self.fc2_actor = torch.nn.Linear(self.hidden, self.hidden)
         self.fc3_actor_mean = torch.nn.Linear(self.hidden, action_space)
@@ -24,6 +31,9 @@ class Actor(torch.nn.Module):
         self.init_weights()
 
     def init_weights(self):
+        """
+        Initialize the weights of the network.
+        """
         for m in self.modules():
             if isinstance(m, torch.nn.Linear):
                 torch.nn.init.orthogonal_(m.weight)
@@ -31,7 +41,13 @@ class Actor(torch.nn.Module):
 
     def forward(self, x_state):
         """
-            Actor forward pass
+        Forward pass through the Actor network.
+
+        Args:
+            x_state (Tensor): Input state.
+
+        Returns:
+            Normal: Action distribution.
         """
         x_actor = self.tanh(self.fc1_actor(x_state))
         x_actor = self.tanh(self.fc2_actor(x_actor))
@@ -43,11 +59,18 @@ class Actor(torch.nn.Module):
 
 class Critic(torch.nn.Module):
     def __init__(self, state_space):
+        """
+        Initialize the Critic network.
+
+        Args:
+            state_space (int): Dimension of the state space.
+        """
         super().__init__()
         self.state_space = state_space
         self.hidden = 64
         self.tanh = torch.nn.Tanh()
 
+        # Critic network layers
         self.fc1_critic = torch.nn.Linear(state_space, self.hidden)
         self.fc2_critic = torch.nn.Linear(self.hidden, self.hidden)
         self.fc3_critic_value = torch.nn.Linear(self.hidden, 1)
@@ -55,6 +78,9 @@ class Critic(torch.nn.Module):
         self.init_weights()
 
     def init_weights(self):
+        """
+        Initialize the weights of the network.
+        """
         for m in self.modules():
             if isinstance(m, torch.nn.Linear):
                 torch.nn.init.orthogonal_(m.weight)
@@ -62,7 +88,13 @@ class Critic(torch.nn.Module):
 
     def forward(self, x_state):
         """
-            Critic forward pass
+        Forward pass through the Critic network.
+
+        Args:
+            x_state (Tensor): Input state.
+
+        Returns:
+            Tensor: State value.
         """
         x_state = self.tanh(self.fc1_critic(x_state))
         x_state = self.tanh(self.fc2_critic(x_state))
@@ -70,8 +102,15 @@ class Critic(torch.nn.Module):
         return value
 
 class Agent(object):
-    
     def __init__(self, actor, critic, device='cuda'):
+        """
+        Initialize the Agent.
+
+        Args:
+            actor (Actor): Actor network.
+            critic (Critic): Critic network.
+            device (str): Device to run the computations on.
+        """
         self.train_device = device
         self.actor = actor.to(self.train_device)
         self.critic = critic.to(self.train_device)
@@ -87,7 +126,9 @@ class Agent(object):
         self.entropy_coef = 0.1
 
     def update_policy(self):
-        
+        """
+        Update the policy and value networks based on collected experiences.
+        """
         action_log_probs = torch.stack(self.action_log_probs, dim=0).to(self.train_device).squeeze(-1)
         states = torch.stack(self.states, dim=0).to(self.train_device).squeeze(-1)
         actions = torch.stack(self.actions, dim=0).to(self.train_device).squeeze(-1)
@@ -101,7 +142,7 @@ class Agent(object):
         # Compute state values from critic
         values = self.critic(states).squeeze(-1)
         
-        # Compute the action distributio
+        # Compute the action distribution
         normal_dist = self.actor(states)
         
         # Calculate entropy
@@ -116,7 +157,7 @@ class Agent(object):
         advantages = target_values - values
 
         # Normalize the advantages
-        #advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+        # advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
         
         # Compute critic loss
         critic_loss = torch.mean((advantages) ** 2)
@@ -135,23 +176,39 @@ class Agent(object):
         self.optimizerC.step()
         
     def get_action(self, state, evaluation=False):
-        """ state -> action (3-d), action_log_densities """
-        x = torch.from_numpy(state).float().to(self.train_device)
+        """
+        Get action from the policy network given the current state.
 
+        Args:
+            state (numpy.array): Current state.
+            evaluation (bool): If true, return the mean action.
+
+        Returns:
+            tuple: Action and action log probability.
+        """
+        x = torch.from_numpy(state).float().to(self.train_device)
         normal_dist = self.actor(x)
         
-        if evaluation:  # Return mean
+        if evaluation:  # Return mean action during evaluation
             return normal_dist.mean, None
-
-        else:   # Sample from the distribution
+        else:  # Sample from the distribution during training
             action = normal_dist.sample()
-
-            # Compute Log probability of the action
+            # Compute log probability of the action
             action_log_prob = normal_dist.log_prob(action).sum()
-
             return action, action_log_prob
 
     def store_outcome(self, state, action, next_state, action_log_prob, reward, done):
+        """
+        Store the outcome of an action.
+
+        Args:
+            state (numpy.array): Current state.
+            action (Tensor): Action taken.
+            next_state (numpy.array): Next state.
+            action_log_prob (Tensor): Log probability of the action.
+            reward (float): Reward received.
+            done (bool): Whether the episode is done.
+        """
         self.states.append(torch.from_numpy(state).float())
         self.actions.append(action)
         self.next_states.append(torch.from_numpy(next_state).float())

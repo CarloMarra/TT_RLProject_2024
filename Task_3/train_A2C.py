@@ -5,13 +5,16 @@ import torch
 import gym
 
 from env.custom_hopper import *
-from Task_3.agent2_A2C import Agent, Actor, Critic
+from Task_3.agent_A2C import Agent, Actor, Critic
 
 def parse_args():
+    """
+    Parse command-line arguments.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('--n-episodes', default=2000, type=int, help='Number of training episodes')
     parser.add_argument('--print-every', default=300, type=int, help='Print info every <> episodes')
-    parser.add_argument('--device', default='cuda', type=str, help='network device [cpu, cuda]')
+    parser.add_argument('--device', default='cuda', type=str, help='Network device [cpu, cuda]')
 
     return parser.parse_args()
 
@@ -19,7 +22,9 @@ args = parse_args()
 # render = True
 
 def main():
-
+    """
+    Main function to train the RL agent.
+    """
     env = gym.make('CustomHopper-source-v0')
     # env = gym.make('CustomHopper-target-v0')
 
@@ -53,7 +58,6 @@ def main():
         state = env.reset()  # Reset the environment and observe the initial state
 
         while not done:  # Loop until the episode is over
-
             action, action_probabilities = agent.get_action(state)
             previous_state = state
 
