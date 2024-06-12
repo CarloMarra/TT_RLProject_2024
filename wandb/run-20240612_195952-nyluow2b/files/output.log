@@ -1,0 +1,82 @@
+Using cuda device
+Eval num_timesteps=8000, episode_reward=90.59 +/- 7.52
+Episode length: 109.20 +/- 8.23
+New best mean reward!
+Eval num_timesteps=16000, episode_reward=99.73 +/- 6.69
+Episode length: 117.80 +/- 6.85
+New best mean reward!
+Mean reward: 100.08818810000001 +/- 4.906995498104425 at timestep 16000
+Eval num_timesteps=24000, episode_reward=96.96 +/- 4.11
+Episode length: 116.20 +/- 4.71
+Eval num_timesteps=32000, episode_reward=90.07 +/- 7.38
+Episode length: 107.80 +/- 8.84
+Mean reward: 93.75273380000002 +/- 6.164995881462235 at timestep 32000
+
+
+
+
+
+
+
+
+
+Eval num_timesteps=40000, episode_reward=138.47 +/- 4.52
+Episode length: 91.60 +/- 2.24
+New best mean reward!
+Eval num_timesteps=48000, episode_reward=140.00 +/- 5.12
+Episode length: 92.60 +/- 2.24
+New best mean reward!
+Mean reward: 136.65979149999998 +/- 8.206846642308092 at timestep 48000
+Eval num_timesteps=56000, episode_reward=139.25 +/- 6.88
+Episode length: 92.20 +/- 3.54
+Eval num_timesteps=64000, episode_reward=135.10 +/- 6.91
+Episode length: 90.00 +/- 3.46
+Mean reward: 139.3039573 +/- 6.65895305926457 at timestep 64000
+
+
+
+
+
+
+
+
+
+
+
+Eval num_timesteps=72000, episode_reward=191.70 +/- 0.96
+Episode length: 90.60 +/- 0.49
+New best mean reward!
+Eval num_timesteps=80000, episode_reward=190.51 +/- 1.15
+Episode length: 90.00 +/- 0.63
+Mean reward: 189.9235465 +/- 1.376415546346982 at timestep 80000
+Eval num_timesteps=88000, episode_reward=190.11 +/- 0.70
+Episode length: 89.80 +/- 0.40
+Eval num_timesteps=96000, episode_reward=190.03 +/- 2.39
+Episode length: 89.80 +/- 1.17
+Mean reward: 189.7012084 +/- 2.01579942507657 at timestep 96000
+
+
+
+
+
+
+
+
+
+
+Eval num_timesteps=104000, episode_reward=221.64 +/- 0.95
+Episode length: 103.80 +/- 0.40
+New best mean reward!
+Eval num_timesteps=112000, episode_reward=222.15 +/- 0.35
+Episode length: 104.00 +/- 0.00
+New best mean reward!
+Mean reward: 222.01173279999998 +/- 0.7328634740241615 at timestep 112000
+Eval num_timesteps=120000, episode_reward=221.19 +/- 1.11
+Episode length: 103.60 +/- 0.49
+Eval num_timesteps=128000, episode_reward=222.23 +/- 0.36
+Episode length: 104.00 +/- 0.00
+New best mean reward!
+Mean reward: 221.75768090000003 +/- 1.1620544642269968 at timestep 128000
+
+[35m 100%[39m [38m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[39m [32m131,072/100,000 [39m [ [33m0:01:24[39m < [36m0:00:00[39m , [31m1,399 it/s[39m ]
+[?25h

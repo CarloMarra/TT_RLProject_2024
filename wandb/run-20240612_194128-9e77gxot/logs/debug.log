@@ -1,0 +1,35 @@
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_setup.py:_flush():76] Current SDK version is 0.17.1
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_setup.py:_flush():76] Configure stats pid to 20708
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_setup.py:_flush():76] Loading settings from /home/ale/.config/wandb/settings
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_setup.py:_flush():76] Loading settings from /home/ale/TT_RLProject_2024/wandb/settings
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'cm_datascience', 'entity': 'cm_datascience', 'root_dir': '/home/ale/TT_RLProject_2024', 'sweep_id': 'zxajq6be', 'run_id': '9e77gxot', 'sweep_param_path': '/home/ale/TT_RLProject_2024/wandb/sweep-zxajq6be/config-9e77gxot.yaml'}
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'Task_4/WANDB_v1.py', 'program_abspath': '/home/ale/TT_RLProject_2024/Task_4/WANDB_v1.py', 'program': '/home/ale/TT_RLProject_2024/Task_4/WANDB_v1.py'}
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_init.py:_log_setup():520] Logging user logs to /home/ale/TT_RLProject_2024/wandb/run-20240612_194128-9e77gxot/logs/debug.log
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_init.py:_log_setup():521] Logging internal logs to /home/ale/TT_RLProject_2024/wandb/run-20240612_194128-9e77gxot/logs/debug-internal.log
+2024-06-12 19:41:28,876 INFO    Thread-2  :20708 [wandb_init.py:init():560] calling init triggers
+2024-06-12 19:41:28,877 INFO    Thread-2  :20708 [wandb_init.py:init():568] wandb.init called with sweep_config: {'batch_size': 64, 'clip_range': 0.2, 'ent_coef': 0, 'gamma': 0.99, 'learning_rate': 0.01, 'n_epochs': 5, 'n_steps': 512, 'vf_coef': 0.35}
+config: {}
+2024-06-12 19:41:28,877 INFO    Thread-2  :20708 [wandb_init.py:init():610] starting backend
+2024-06-12 19:41:28,877 INFO    Thread-2  :20708 [wandb_init.py:init():614] setting up manager
+2024-06-12 19:41:28,878 INFO    Thread-2  :20708 [backend.py:_multiprocessing_setup():107] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-06-12 19:41:28,880 INFO    Thread-2  :20708 [wandb_init.py:init():622] backend started and connected
+2024-06-12 19:41:28,884 INFO    Thread-2  :20708 [wandb_run.py:_config_callback():1382] config_cb None None {'batch_size': 64, 'clip_range': 0.2, 'ent_coef': 0, 'gamma': 0.99, 'learning_rate': 0.01, 'n_epochs': 5, 'n_steps': 512, 'vf_coef': 0.35}
+2024-06-12 19:41:28,885 INFO    Thread-2  :20708 [wandb_init.py:init():711] updated telemetry
+2024-06-12 19:41:28,891 INFO    Thread-2  :20708 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2024-06-12 19:41:29,292 INFO    Thread-2  :20708 [wandb_run.py:_on_init():2402] communicating current version
+2024-06-12 19:41:29,333 INFO    Thread-2  :20708 [wandb_run.py:_on_init():2411] got version response 
+2024-06-12 19:41:29,334 INFO    Thread-2  :20708 [wandb_init.py:init():795] starting run threads in backend
+2024-06-12 19:41:29,746 INFO    Thread-2  :20708 [wandb_run.py:_console_start():2380] atexit reg
+2024-06-12 19:41:29,747 INFO    Thread-2  :20708 [wandb_run.py:_redirect():2235] redirect: wrap_raw
+2024-06-12 19:41:29,747 INFO    Thread-2  :20708 [wandb_run.py:_redirect():2300] Wrapping output streams.
+2024-06-12 19:41:29,747 INFO    Thread-2  :20708 [wandb_run.py:_redirect():2325] Redirects installed.
+2024-06-12 19:41:29,749 INFO    Thread-2  :20708 [wandb_init.py:init():838] run started, returning control to user process
+2024-06-12 19:41:31,559 INFO    Thread-2  :20708 [wandb_run.py:_finish():2109] finishing run cm_datascience/cm_datascience/9e77gxot
+2024-06-12 19:41:31,559 INFO    Thread-2  :20708 [wandb_run.py:_atexit_cleanup():2349] got exitcode: 1
+2024-06-12 19:41:31,559 INFO    Thread-2  :20708 [wandb_run.py:_restore():2332] restore
+2024-06-12 19:41:31,559 INFO    Thread-2  :20708 [wandb_run.py:_restore():2338] restore done
+2024-06-12 19:41:36,129 INFO    Thread-2  :20708 [wandb_run.py:_footer_history_summary_info():4008] rendering history
+2024-06-12 19:41:36,129 INFO    Thread-2  :20708 [wandb_run.py:_footer_history_summary_info():4040] rendering summary
+2024-06-12 19:41:36,132 INFO    Thread-2  :20708 [wandb_run.py:_footer_sync_info():3967] logging synced files

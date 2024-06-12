@@ -1,0 +1,35 @@
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_setup.py:_flush():76] Current SDK version is 0.17.1
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_setup.py:_flush():76] Configure stats pid to 27079
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_setup.py:_flush():76] Loading settings from /home/ale/.config/wandb/settings
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_setup.py:_flush():76] Loading settings from /home/ale/TT_RLProject_2024/wandb/settings
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'cm_datascience', 'entity': 'cm_datascience', 'root_dir': '/home/ale/TT_RLProject_2024', 'run_id': 'nyluow2b', 'sweep_param_path': '/home/ale/TT_RLProject_2024/wandb/sweep-z5pft0k5/config-nyluow2b.yaml', 'sweep_id': 'z5pft0k5'}
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'Task_4/WANDB_v1.py', 'program_abspath': '/home/ale/TT_RLProject_2024/Task_4/WANDB_v1.py', 'program': '/home/ale/TT_RLProject_2024/Task_4/WANDB_v1.py'}
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_init.py:_log_setup():520] Logging user logs to /home/ale/TT_RLProject_2024/wandb/run-20240612_195952-nyluow2b/logs/debug.log
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_init.py:_log_setup():521] Logging internal logs to /home/ale/TT_RLProject_2024/wandb/run-20240612_195952-nyluow2b/logs/debug-internal.log
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_init.py:init():560] calling init triggers
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_init.py:init():568] wandb.init called with sweep_config: {'batch_size': 128, 'clip_range': 0.1, 'ent_coef': 0.01, 'gamma': 0.99, 'learning_rate': 0.01, 'n_epochs': 15, 'n_steps': 2048, 'vf_coef': 0.35}
+config: {}
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_init.py:init():610] starting backend
+2024-06-12 19:59:52,392 INFO    Thread-23 :27079 [wandb_init.py:init():614] setting up manager
+2024-06-12 19:59:52,394 INFO    Thread-23 :27079 [backend.py:_multiprocessing_setup():107] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-06-12 19:59:52,395 INFO    Thread-23 :27079 [wandb_init.py:init():622] backend started and connected
+2024-06-12 19:59:52,398 INFO    Thread-23 :27079 [wandb_run.py:_config_callback():1382] config_cb None None {'batch_size': 128, 'clip_range': 0.1, 'ent_coef': 0.01, 'gamma': 0.99, 'learning_rate': 0.01, 'n_epochs': 15, 'n_steps': 2048, 'vf_coef': 0.35}
+2024-06-12 19:59:52,399 INFO    Thread-23 :27079 [wandb_init.py:init():711] updated telemetry
+2024-06-12 19:59:52,413 INFO    Thread-23 :27079 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2024-06-12 19:59:52,798 INFO    Thread-23 :27079 [wandb_run.py:_on_init():2402] communicating current version
+2024-06-12 19:59:52,848 INFO    Thread-23 :27079 [wandb_run.py:_on_init():2411] got version response 
+2024-06-12 19:59:52,848 INFO    Thread-23 :27079 [wandb_init.py:init():795] starting run threads in backend
+2024-06-12 19:59:53,182 INFO    Thread-23 :27079 [wandb_run.py:_console_start():2380] atexit reg
+2024-06-12 19:59:53,182 INFO    Thread-23 :27079 [wandb_run.py:_redirect():2235] redirect: wrap_raw
+2024-06-12 19:59:53,182 INFO    Thread-23 :27079 [wandb_run.py:_redirect():2300] Wrapping output streams.
+2024-06-12 19:59:53,183 INFO    Thread-23 :27079 [wandb_run.py:_redirect():2325] Redirects installed.
+2024-06-12 19:59:53,183 INFO    Thread-23 :27079 [wandb_init.py:init():838] run started, returning control to user process
+2024-06-12 20:01:44,792 INFO    Thread-23 :27079 [wandb_run.py:_finish():2109] finishing run cm_datascience/cm_datascience/nyluow2b
+2024-06-12 20:01:44,792 INFO    Thread-23 :27079 [wandb_run.py:_atexit_cleanup():2349] got exitcode: 0
+2024-06-12 20:01:44,792 INFO    Thread-23 :27079 [wandb_run.py:_restore():2332] restore
+2024-06-12 20:01:44,792 INFO    Thread-23 :27079 [wandb_run.py:_restore():2338] restore done
+2024-06-12 20:01:47,689 INFO    Thread-23 :27079 [wandb_run.py:_footer_history_summary_info():4008] rendering history
+2024-06-12 20:01:47,689 INFO    Thread-23 :27079 [wandb_run.py:_footer_history_summary_info():4040] rendering summary
+2024-06-12 20:01:47,692 INFO    Thread-23 :27079 [wandb_run.py:_footer_sync_info():3967] logging synced files

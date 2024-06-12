@@ -1,0 +1,73 @@
+Using cuda device
+Eval num_timesteps=8000, episode_reward=170.46 +/- 46.81
+Episode length: 173.80 +/- 25.01
+New best mean reward!
+Eval num_timesteps=16000, episode_reward=156.30 +/- 26.19
+Episode length: 167.20 +/- 25.48
+Mean reward: 136.0643282 +/- 15.0662456520997 at timestep 16000
+Eval num_timesteps=24000, episode_reward=139.02 +/- 12.73
+Episode length: 150.80 +/- 14.12
+Eval num_timesteps=32000, episode_reward=150.65 +/- 36.22
+Episode length: 153.60 +/- 20.81
+Mean reward: 134.923399 +/- 20.717449171321412 at timestep 32000
+
+
+
+
+
+
+
+
+
+Eval num_timesteps=40000, episode_reward=165.12 +/- 2.23
+Episode length: 89.80 +/- 1.17
+Eval num_timesteps=48000, episode_reward=167.33 +/- 2.00
+Episode length: 91.00 +/- 1.10
+Mean reward: 167.28005530000001 +/- 1.8959695711960702 at timestep 48000
+Eval num_timesteps=56000, episode_reward=169.59 +/- 0.50
+Episode length: 92.40 +/- 0.49
+Eval num_timesteps=64000, episode_reward=167.67 +/- 2.56
+Episode length: 91.20 +/- 1.47
+Mean reward: 167.44860079999998 +/- 2.896811268202673 at timestep 64000
+
+
+
+
+
+
+
+
+
+Eval num_timesteps=72000, episode_reward=95.83 +/- 1.00
+Episode length: 51.80 +/- 0.40
+Eval num_timesteps=80000, episode_reward=95.68 +/- 0.79
+Episode length: 51.80 +/- 0.40
+Mean reward: 96.4433693 +/- 0.9992584254068664 at timestep 80000
+Eval num_timesteps=88000, episode_reward=96.46 +/- 0.28
+Episode length: 52.00 +/- 0.00
+Eval num_timesteps=96000, episode_reward=97.37 +/- 1.09
+Episode length: 52.40 +/- 0.49
+Mean reward: 96.8298316 +/- 0.9470073743044666 at timestep 96000
+
+
+
+
+
+
+
+
+
+
+Eval num_timesteps=104000, episode_reward=125.02 +/- 1.75
+Episode length: 63.60 +/- 0.80
+Eval num_timesteps=112000, episode_reward=124.18 +/- 1.65
+Episode length: 63.20 +/- 0.75
+Mean reward: 126.16115730000001 +/- 1.1865652846797845 at timestep 112000
+Eval num_timesteps=120000, episode_reward=125.07 +/- 1.29
+Episode length: 63.60 +/- 0.49
+Eval num_timesteps=128000, episode_reward=124.90 +/- 0.91
+Episode length: 63.40 +/- 0.49
+Mean reward: 124.462339 +/- 1.1398905577342076 at timestep 128000
+
+[35m 100%[39m [38m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[39m [32m131,072/100,000 [39m [ [33m0:01:22[39m < [36m0:00:00[39m , [31m1,688 it/s[39m ]
+[?25h

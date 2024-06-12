@@ -1,0 +1,1 @@
+{"mean_reward": 211.8806298, "std_reward": 1.5365724497311537, "timestep": 128000, "_timestamp": 1718214699.9911559, "_runtime": 110.22839188575745, "_step": 8, "model_path": "/home/ale/TT_RLProject_2024/Task_4/ppo_Hopper_v0_0.001", "_wandb": {"runtime": 109}}

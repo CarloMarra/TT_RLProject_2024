@@ -1,0 +1,216 @@
+wandb_version: 1
+
+learning_rate:
+  desc: null
+  value: 0.001
+gamma:
+  desc: null
+  value: 0.99
+clip_range:
+  desc: null
+  value: 0.2
+total_timesteps:
+  desc: null
+  value: 100000
+_wandb:
+  desc: null
+  value:
+    python_version: 3.7.12
+    cli_version: 0.17.1
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1718216247
+    t:
+      1:
+      - 1
+      - 55
+      2:
+      - 1
+      - 55
+      3:
+      - 2
+      - 16
+      - 22
+      - 23
+      - 35
+      - 37
+      4: 3.7.12
+      5: 0.17.1
+      8:
+      - 5
+      13: linux-x86_64
+batch_size:
+  desc: null
+  value: 64
+ent_coef:
+  desc: null
+  value: 0
+n_epochs:
+  desc: null
+  value: 5
+n_steps:
+  desc: null
+  value: 4096
+vf_coef:
+  desc: null
+  value: 0.5
+algo:
+  desc: null
+  value: PPO
+policy_class:
+  desc: null
+  value: <class 'stable_baselines3.common.policies.ActorCriticPolicy'>
+device:
+  desc: null
+  value: cuda
+env:
+  desc: null
+  value: <stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x7fac9c6fbc10>
+_vec_normalize_env:
+  desc: null
+  value: None
+verbose:
+  desc: null
+  value: 1
+policy_kwargs:
+  desc: null
+  value: '{}'
+observation_space:
+  desc: null
+  value: Box([-inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf], [inf inf inf
+    inf inf inf inf inf inf inf inf], (11,), float64)
+action_space:
+  desc: null
+  value: Box([-1. -1. -1.], [1. 1. 1.], (3,), float32)
+n_envs:
+  desc: null
+  value: 16
+num_timesteps:
+  desc: null
+  value: 0
+_total_timesteps:
+  desc: null
+  value: 100000
+_num_timesteps_at_start:
+  desc: null
+  value: 0
+seed:
+  desc: null
+  value: None
+action_noise:
+  desc: null
+  value: None
+start_time:
+  desc: null
+  value: 1718216248978106867
+policy:
+  desc: null
+  value: "ActorCriticPolicy(\n  (features_extractor): FlattenExtractor(\n    (flatten):\
+    \ Flatten(start_dim=1, end_dim=-1)\n  )\n  (pi_features_extractor): FlattenExtractor(\n\
+    \    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (vf_features_extractor):\
+    \ FlattenExtractor(\n    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (mlp_extractor):\
+    \ MlpExtractor(\n    (shared_net): Sequential()\n    (policy_net): Sequential(\n\
+    \      (0): Linear(in_features=11, out_features=64, bias=True)\n      (1): Tanh()\n\
+    \      (2): Linear(in_features=64, out_features=64, bias=True)\n      (3): Tanh()\n\
+    \    )\n    (value_net): Sequential(\n      (0): Linear(in_features=11, out_features=64,\
+    \ bias=True)\n      (1): Tanh()\n      (2): Linear(in_features=64, out_features=64,\
+    \ bias=True)\n      (3): Tanh()\n    )\n  )\n  (action_net): Linear(in_features=64,\
+    \ out_features=3, bias=True)\n  (value_net): Linear(in_features=64, out_features=1,\
+    \ bias=True)\n)"
+tensorboard_log:
+  desc: null
+  value: None
+lr_schedule:
+  desc: null
+  value: <function constant_fn.<locals>.func at 0x7fac9c7980e0>
+_last_obs:
+  desc: null
+  value: "[[ 1.24546658e+00 -4.93001187e-04  2.51048779e-03 -2.95209734e-03\n  -4.38928824e-03\
+    \  4.47968575e-03  9.97106633e-04 -4.19840910e-03\n  -4.93412479e-04 -4.93068478e-03\
+    \ -2.29230302e-04]\n [ 1.25375119e+00 -1.42324220e-03  1.67547839e-03  7.05807658e-04\n\
+    \   3.19782628e-03  2.06553770e-03 -2.27195024e-03 -2.28385075e-03\n   8.92468293e-04\
+    \ -4.30366206e-03  3.83690605e-03]\n [ 1.24842713e+00  3.66814046e-04 -3.16801641e-04\
+    \ -1.41565536e-03\n  -1.20188571e-03  1.29766383e-03 -3.61908029e-03  4.91177000e-03\n\
+    \   4.56943642e-03  3.92605441e-03 -1.43931369e-03]\n [ 1.25262885e+00 -2.44495899e-03\
+    \ -1.62760223e-03 -4.50278323e-05\n  -3.40211504e-04  1.64479610e-03 -3.59572005e-03\
+    \  3.01369341e-03\n  -4.77321543e-03  7.72809779e-04  3.09607269e-03]\n [ 1.24648168e+00\
+    \  2.70690145e-03  4.97765725e-03  5.04363426e-04\n   1.97808200e-03  5.81635211e-04\
+    \  7.33046858e-04  2.94298057e-03\n  -7.22189962e-04 -6.26202681e-05 -2.69718375e-03]\n\
+    \ [ 1.24754763e+00  5.11576924e-04  4.14082253e-03  1.07693870e-03\n  -2.11347862e-03\
+    \ -1.78526877e-03 -4.66930055e-04  1.56822712e-03\n  -3.16592620e-03 -4.39848364e-03\
+    \  3.55900664e-04]\n [ 1.25271342e+00  5.97690640e-04 -1.15815641e-04 -3.06582320e-03\n\
+    \   3.50484488e-03 -4.87635909e-03 -4.17708837e-04  4.71110612e-04\n  -1.41932302e-03\
+    \  3.14272731e-03 -3.11912202e-03]\n [ 1.24866116e+00  1.52093173e-03 -1.52707323e-03\
+    \  4.58241287e-03\n  -4.69392343e-03  4.65120035e-03 -5.46508962e-04  4.61507230e-04\n\
+    \  -2.48928834e-03 -6.32630552e-04 -2.77387561e-03]\n [ 1.25182685e+00 -2.46226537e-03\
+    \ -3.42467278e-03 -1.02031895e-03\n   4.26609068e-03  4.92202429e-03 -1.88879388e-03\
+    \ -1.38743351e-03\n  -3.55427009e-03 -1.42227057e-03  3.23764148e-03]\n [ 1.24877792e+00\
+    \  4.68578313e-03  2.93643920e-03  1.26761442e-03\n   8.15816559e-04  2.09917225e-03\
+    \ -2.75866948e-03 -2.54355092e-03\n   4.14341685e-03  2.92835846e-03 -2.81500153e-03]\n\
+    \ [ 1.25319843e+00  2.40695702e-03 -2.54221664e-03 -4.99722162e-03\n   4.01939105e-03\
+    \  4.33857015e-03 -3.50671725e-03 -1.32765456e-03\n   1.08743573e-03 -1.75593895e-03\
+    \  4.80955255e-03]\n [ 1.25088207e+00  9.58355309e-04 -3.71404726e-03 -4.76692631e-03\n\
+    \  -3.43829165e-03 -1.19452335e-03  2.57936844e-03  1.51431502e-03\n  -8.11650157e-04\
+    \ -1.50403897e-03  4.38410630e-03]\n [ 1.24762886e+00 -3.38347550e-04  1.01489974e-03\
+    \  3.65770034e-04\n  -2.41190430e-03  4.12814663e-03 -1.34175970e-03 -1.30218113e-03\n\
+    \  -7.11687299e-04  4.83209790e-03 -3.15257438e-03]\n [ 1.24718895e+00 -3.61667151e-03\
+    \ -4.17420464e-03  1.84122031e-03\n  -2.08950033e-03 -2.42399398e-04  1.17217537e-03\
+    \ -3.59048311e-04\n   3.50153877e-04  2.66865895e-03  3.91756305e-03]\n [ 1.24847731e+00\
+    \ -1.10408839e-03  1.73557237e-03  4.43644473e-03\n   2.75454601e-04  1.23523303e-03\
+    \  2.04636223e-03  1.14806616e-03\n   1.43973253e-03  1.46363788e-05 -2.61120582e-03]\n\
+    \ [ 1.24925173e+00 -1.48866389e-03  8.57080262e-04 -2.55985031e-04\n   2.70948632e-03\
+    \  1.43876568e-03  4.24033608e-04 -3.38636560e-03\n  -4.81816318e-03  4.02258174e-03\
+    \ -1.05395170e-03]]"
+_last_episode_starts:
+  desc: null
+  value: "[ True  True  True  True  True  True  True  True  True  True  True  True\n\
+    \  True  True  True  True]"
+_last_original_obs:
+  desc: null
+  value: None
+_episode_num:
+  desc: null
+  value: 0
+use_sde:
+  desc: null
+  value: 'False'
+sde_sample_freq:
+  desc: null
+  value: -1
+_current_progress_remaining:
+  desc: null
+  value: 1
+ep_info_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+ep_success_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+_n_updates:
+  desc: null
+  value: 0
+_logger:
+  desc: null
+  value: <stable_baselines3.common.logger.Logger object at 0x7fac9c7b9c90>
+_custom_logger:
+  desc: null
+  value: 'True'
+gae_lambda:
+  desc: null
+  value: 0.95
+max_grad_norm:
+  desc: null
+  value: 0.5
+rollout_buffer:
+  desc: null
+  value: <stable_baselines3.common.buffers.RolloutBuffer object at 0x7fac9c8b2950>
+clip_range_vf:
+  desc: null
+  value: None
+normalize_advantage:
+  desc: null
+  value: 'True'
+target_kl:
+  desc: null
+  value: None
