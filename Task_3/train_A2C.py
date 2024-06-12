@@ -5,14 +5,14 @@ import torch
 import gym
 
 from env.custom_hopper import *
-from Task_3.agent_A2C import Agent, Actor, Critic
+from agent_A2C import Agent, Actor, Critic
 
 def parse_args():
     """
     Parse command-line arguments.
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('--n-episodes', default=2000, type=int, help='Number of training episodes')
+    parser.add_argument('--n-episodes', default=2400, type=int, help='Number of training episodes')
     parser.add_argument('--print-every', default=300, type=int, help='Print info every <> episodes')
     parser.add_argument('--device', default='cuda', type=str, help='Network device [cpu, cuda]')
 

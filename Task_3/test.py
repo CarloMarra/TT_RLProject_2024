@@ -6,7 +6,7 @@ import torch
 import gym
 
 from env.custom_hopper import *
-from Task_3.agent_A2C import Agent, Actor, Critic
+from agent_A2C import Agent, Actor, Critic
 
 def parse_args():
     """

@@ -123,7 +123,7 @@ class Agent(object):
         self.action_log_probs = []
         self.rewards = []
         self.done = []
-        self.entropy_coef = 0.1
+
 
     def update_policy(self):
         """
@@ -142,11 +142,6 @@ class Agent(object):
         # Compute state values from critic
         values = self.critic(states).squeeze(-1)
         
-        # Compute the action distribution
-        normal_dist = self.actor(states)
-        
-        # Calculate entropy
-        entropy = normal_dist.entropy().mean()
         
         next_values = self.critic(next_states).squeeze(-1)
 
@@ -163,7 +158,7 @@ class Agent(object):
         critic_loss = torch.mean((advantages) ** 2)
 
         # Compute actor loss
-        actor_loss = -torch.mean(action_log_probs * advantages.detach()) - self.entropy_coef * entropy
+        actor_loss = -torch.mean(action_log_probs * advantages.detach())
 
         # Update actor network
         self.optimizerA.zero_grad()
