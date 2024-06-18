@@ -112,7 +112,7 @@ class Agent(object):
         # Compute discounted returns
         discounted_rewards = discount_rewards(rewards, self.gamma)
         
-        baseline = 20.0
+        baseline = 70
         advantages = discounted_rewards - baseline
         policy_loss = -torch.sum(action_log_probs * advantages)
         

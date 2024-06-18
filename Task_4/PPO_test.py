@@ -12,7 +12,7 @@ def main():
     vec_env = make_vec_env('CustomHopper-source-v0', n_envs=1)
    
 
-    model = PPO.load("/home/ale/TT_RLProject_2024/Task_4/ppo_Hopper_v0_4env")
+    model = PPO.load("Task_4/ppo_Hopper_v0_default.zip")
 
     obs = vec_env.reset()
     while True:
