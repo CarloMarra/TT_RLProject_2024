@@ -2,18 +2,21 @@
 
 ## Task 2
 ### Training
-- [ ] Train REINFORCE (baseline = 0) for 2500 episodes
+- [x] Train REINFORCE (baseline = 0) for 2500 episodes
 - [x] Train REINFORCE (baseline = 20) for 2500 episodes
-- [ ] Train REINFORCE (baseline = 50) for 2500 episodes
-- [ ] Train REINFORCE (baseline = 70) for 2500 episodes
-- [ ] Train REINFORCE (baseline = -25) for 2500 episodes (?)
+- [x] Train REINFORCE (baseline = 70) for 2500 episodes
 
 ### Testing
-- [ ] Test REINFORCE (baseline = 0): ...
-- [ ] Test REINFORCE (baseline = 20): ...
-- [ ] Test REINFORCE (baseline = 50): ...
-- [ ] Test REINFORCE (baseline = 70): ...
-- [ ] Test REINFORCE (baseline = -25): ... (?)
+- [x] Test REINFORCE (baseline = 0): 223.687 $\pm$ 89.379
+- [x] Test REINFORCE (baseline = 20): 81.140 $\pm$ 54.431
+- [x] Test REINFORCE (baseline = 70): 211.381 $\pm$ 48.166
+
+### Evaluation NN Arch (w.r.t. Best Performance REINFORCE)
+- [ ] Train REINFORCE 64x2
+- [ ] Test REINFORCE 64x2:
+- [ ] Train REINFORCE 128x2
+- [ ] Test REINFORCE 128x2:
+
 
 ## Task 3
 - [x] Train Base A2C for 2500 episodes

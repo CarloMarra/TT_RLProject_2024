@@ -5,14 +5,14 @@ import torch
 import gym
 
 from env.custom_hopper import *
-from agent import Agent, Policy
+from agent_64x2 import Agent, Policy
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', default="/home/ale/TT_RLProject_2024/Task_2/REINFORCE_100.mdl", type=str, help='Model path')
+    parser.add_argument('--model', default="/home/ale/TT_RLProject_2024/Task_2/REINFORCE_70_64x2.mdl", type=str, help='Model path')
     parser.add_argument('--device', default='cuda', type=str, help='network device [cpu, cuda]')
     parser.add_argument('--render', default=True, action='store_true', help='Render the simulator')
-    parser.add_argument('--episodes', default=1000, type=int, help='Number of test episodes')
+    parser.add_argument('--episodes', default=50, type=int, help='Number of test episodes')
 
     return parser.parse_args()
 
@@ -20,40 +20,54 @@ args = parse_args()
 
 
 def main():
+    """
+    Main function to test the RL agent.
+    """
+    # env = gym.make('CustomHopper-source-v0')
+    env = gym.make('CustomHopper-target-v0')
 
-	# env = gym.make('CustomHopper-source-v0')
-	env = gym.make('CustomHopper-target-v0')
+    print('Action space:', env.action_space)
+    print('State space:', env.observation_space)
+    print('Dynamics parameters:', env.get_parameters())
 
-	print('Action space:', env.action_space)
-	print('State space:', env.observation_space)
-	print('Dynamics parameters:', env.get_parameters())
-	
-	observation_space_dim = env.observation_space.shape[-1]
-	action_space_dim = env.action_space.shape[-1]
+    observation_space_dim = env.observation_space.shape[-1]
+    action_space_dim = env.action_space.shape[-1]
+    
+    policy = Policy(observation_space_dim, action_space_dim)
+    
+    # Load the trained model
+    policy.load_state_dict(torch.load(args.model), strict=True)
+    
+    # Initialize the agent
+    agent = Agent(policy, device=args.device)
 
-	policy = Policy(observation_space_dim, action_space_dim)
-	policy.load_state_dict(torch.load(args.model), strict=True)
+    rewards = []
 
-	agent = Agent(policy, device=args.device)
+    for episode in range(args.episodes):
+        done = False
+        test_reward = 0
+        state = env.reset()
 
-	for episode in range(args.episodes):
-		done = False
-		test_reward = 0
-		state = env.reset()
+        while not done:
+            # Get action from the agent
+            action, _ = agent.get_action(state, evaluation=True)
+            
+            # Step the environment
+            state, reward, done, info = env.step(action.detach().cpu().numpy())
 
-		while not done:
+            if args.render:
+                env.render()
 
-			action, _ = agent.get_action(state, evaluation=True)
+            test_reward += reward
 
-			state, reward, done, info = env.step(action.detach().cpu().numpy())
+        rewards.append(test_reward)
+        print(f"Episode: {episode + 1} | Return: {test_reward}")
 
-			if args.render:
-				env.render()
+    mean_reward = np.mean(rewards)
+    std_reward = np.std(rewards)
 
-			test_reward += reward
-
-		print(f"Episode: {episode} | Return: {test_reward}")
-	
+    print(f"Mean Reward: {mean_reward}")
+    print(f"Standard Deviation of Reward: {std_reward}")
 
 if __name__ == '__main__':
-	main()
+    main()

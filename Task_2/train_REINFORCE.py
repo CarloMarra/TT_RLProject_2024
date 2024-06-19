@@ -8,7 +8,7 @@ import torch
 import gym
 
 from env.custom_hopper import *
-from agent import Agent, Policy
+from agent_64x2 import Agent, Policy
 
 def parse_args():
     """
@@ -38,7 +38,7 @@ def main():
     print('Dynamics parameters:', env.get_parameters())
 
     # Open CSV file and write header
-    with open('/home/ale/TT_RLProject_2024/Task_2/REINFORCE_training_logs.csv', 'w', newline='') as csvfile:
+    with open('/home/ale/TT_RLProject_2024/Task_2/REINFORCE_70_64x2_Logs.csv', 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(['Episode', 'Train Reward', 'Episode Duration'])
 
@@ -76,7 +76,7 @@ def main():
         episode_duration = episode_end_time - episode_start_time
 
         # Append episode result to CSV file
-        with open('/home/ale/TT_RLProject_2024/Task_2/REINFORCE_training_logs_baseline70.csv', 'a', newline='') as csvfile:
+        with open('/home/ale/TT_RLProject_2024/Task_2/REINFORCE_70_64x2_Logs.csv', 'a', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow([episode + 1, train_reward, episode_duration])
 
@@ -91,7 +91,7 @@ def main():
 
     print(f'Total training time: {total_training_time:.2f} seconds')
 
-    torch.save(agent.policy.state_dict(), "/home/ale/TT_RLProject_2024/Task_2/REINFORCE_70.mdl")
+    torch.save(agent.policy.state_dict(), "/home/ale/TT_RLProject_2024/Task_2/REINFORCE_70_64x2.mdl")
 
 if __name__ == '__main__':
     main()
