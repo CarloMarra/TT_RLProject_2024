@@ -11,7 +11,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', default="/home/ale/TT_RLProject_2024/Task_2/REINFORCE_70_64x2.mdl", type=str, help='Model path')
     parser.add_argument('--device', default='cuda', type=str, help='network device [cpu, cuda]')
-    parser.add_argument('--render', default=True, action='store_true', help='Render the simulator')
+    parser.add_argument('--render', default=False, action='store_true', help='Render the simulator')
     parser.add_argument('--episodes', default=50, type=int, help='Number of test episodes')
 
     return parser.parse_args()

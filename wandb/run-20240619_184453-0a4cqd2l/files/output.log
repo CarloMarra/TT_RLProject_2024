@@ -1,0 +1,14 @@
+
+Using cuda device
+Traceback (most recent call last):
+  File "/home/ale/TT_RLProject_2024/Task_6/UDR_Training.py", line 73, in <module>
+    main()
+  File "/home/ale/TT_RLProject_2024/Task_6/UDR_Training.py", line 48, in main
+    eval_callback = EvalCallback(eval_env=config['eval_env'], eval_freq=1000, callback_after_eval=stop_train_callback, verbose=1)
+  File "/home/ale/miniconda3/envs/mldl/lib/python3.7/site-packages/stable_baselines3/common/callbacks.py", line 381, in __init__
+    eval_env = DummyVecEnv([lambda: eval_env])
+  File "/home/ale/miniconda3/envs/mldl/lib/python3.7/site-packages/stable_baselines3/common/vec_env/dummy_vec_env.py", line 27, in __init__
+    if len(set([id(env.unwrapped) for env in self.envs])) != len(self.envs):
+  File "/home/ale/miniconda3/envs/mldl/lib/python3.7/site-packages/stable_baselines3/common/vec_env/dummy_vec_env.py", line 27, in <listcomp>
+    if len(set([id(env.unwrapped) for env in self.envs])) != len(self.envs):
+AttributeError: 'str' object has no attribute 'unwrapped'

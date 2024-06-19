@@ -55,8 +55,12 @@
 
 ## Task 6
    - [ ] Train Best Source HyperParameters Model with UDR:
-     - 2_000_000 ts (StopTrainingOnNoModelImprovement) for:
-       - [ ] UDR: 0.10
+     - 500_000 ts for:
+       - [x] UDR: 0.10
        - [ ] UDR: 0.25
        - [ ] UDR: 0.50 
-   - [ ] UDR Source $\rightarrow$ Target Test (**New Lower Bound**)
+
+### Testing
+   - [x] UDR Source [0.1, 0.1, 0.1] $\rightarrow$ Target Test (**New Lower Bound**): 1557.972 +/- 204.390
+   - [ ] UDR Source [0.25, 0.25, 0.25] $\rightarrow$ Target Test (**New Lower Bound**): ...
+   - [ ] UDR Source [0.5, 0.5, 0.5] $\rightarrow$ Target Test (**New Lower Bound**): ...

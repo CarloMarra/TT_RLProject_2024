@@ -6,7 +6,7 @@ from .mujoco_env import MujocoEnv
 import argparse
 
 class CustomHopper(MujocoEnv, utils.EzPickle):
-    def __init__(self, domain=None, thigh_range=0.2, leg_range=0.2, foot_range=0.2):
+    def __init__(self, domain=None, thigh_range=0, leg_range=0, foot_range=0):
         self.domain = domain
         self.thigh_range = thigh_range
         self.leg_range = leg_range
@@ -122,7 +122,7 @@ def unregister_env(env_id):
     if env_id in gym.envs.registry.env_specs:
         del gym.envs.registry.env_specs[env_id]
 
-def register_custom_hopper(thigh_range, leg_range, foot_range):
+def register_custom_hopper(thigh_range = 0, leg_range = 0, foot_range = 0):
     unregister_env("CustomHopper-v0")
     unregister_env("CustomHopper-source-v0")
     unregister_env("CustomHopper-target-v0")
