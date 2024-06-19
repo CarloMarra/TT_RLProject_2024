@@ -1,9 +1,27 @@
 # ToDo
 
+## Task 2
+### Training
+- [ ] Train REINFORCE (baseline = 0) for 2500 episodes
+- [x] Train REINFORCE (baseline = 20) for 2500 episodes
+- [ ] Train REINFORCE (baseline = 50) for 2500 episodes
+- [ ] Train REINFORCE (baseline = 70) for 2500 episodes
+- [ ] Train REINFORCE (baseline = -25) for 2500 episodes (?)
+
+### Testing
+- [ ] Test REINFORCE (baseline = 0): ...
+- [ ] Test REINFORCE (baseline = 20): ...
+- [ ] Test REINFORCE (baseline = 50): ...
+- [ ] Test REINFORCE (baseline = 70): ...
+- [ ] Test REINFORCE (baseline = -25): ... (?)
+
 ## Task 3
-- [ ] Train Base A2C for 2500 episodes
-- [ ] Train A2C with entropy = 0.1 for 2500 episodes
-- [ ] Train Base A2C with entropy = 0.1 and lower alive reward for 2500 episodes
+- [x] Train Base A2C for 2500 episodes
+- [x] Train A2C with entropy = 0.1 for 2500 episodes
+- [x] Train Base A2C with entropy = 0.1 and lower alive reward for 2500 episodes
+- [x] Test Base A2C: 279.449 $\pm$ 3.284
+- [x] Test A2C with entropy = 0.1: 474.668 $\pm$ 0.702
+- [x] Test A2C with entropy = 0.1 and lower alive reward: 551.684 $\pm$ 0.511
 
 ## Task 4
 - [x] Check to see if Default Saved Model is on 500_000 ts
