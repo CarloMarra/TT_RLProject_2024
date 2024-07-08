@@ -62,5 +62,5 @@
 
 ### Testing
    - [x] UDR Source [0.1, 0.1, 0.1] $\rightarrow$ Target Test (**New Lower Bound**): 1557.972 +/- 204.390
-   - [ ] UDR Source [0.25, 0.25, 0.25] $\rightarrow$ Target Test (**New Lower Bound**): ...
-   - [ ] UDR Source [0.5, 0.5, 0.5] $\rightarrow$ Target Test (**New Lower Bound**): ...
+   - [x] UDR Source [0.25, 0.25, 0.25] $\rightarrow$ Target Test (**New Lower Bound**): 825.830 +/- 11.829
+   - [x] UDR Source [0.5, 0.5, 0.5] $\rightarrow$ Target Test (**New Lower Bound**): 986.061 +/- 15.688

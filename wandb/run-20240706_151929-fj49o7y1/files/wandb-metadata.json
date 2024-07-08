@@ -1,0 +1,188 @@
+{
+    "os": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-debian-bookworm-sid",
+    "python": "3.7.12",
+    "heartbeatAt": "2024-07-06T13:19:29.646594",
+    "startedAt": "2024-07-06T13:19:29.147248",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/ale/TT_RLProject_2024/Task_6/UDR_Training_Sweep.py",
+    "codePathLocal": "Task_6/UDR_Training_Sweep.py",
+    "codePath": "Task_6/UDR_Training_Sweep.py",
+    "git": {
+        "remote": "https://github.com/CarloMarra/TT_RLProject_2024",
+        "commit": "330e5c6099aa0dbe98e627ec3069c0483e66ff14"
+    },
+    "email": "a.valenti00@gmail.com",
+    "root": "/home/ale/TT_RLProject_2024",
+    "host": "skynet",
+    "username": "ale",
+    "executable": "/home/ale/miniconda3/envs/mldl/bin/python",
+    "cpu_count": 14,
+    "cpu_count_logical": 28,
+    "cpu_freq": {
+        "current": 3417.600999999999,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3417.601,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1006.853931427002,
+            "used": 19.671836853027344
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4080 SUPER",
+            "memory_total": 17171480576
+        }
+    ],
+    "memory": {
+        "total": 31.260414123535156
+    }
+}

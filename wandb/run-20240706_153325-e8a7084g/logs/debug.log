@@ -1,0 +1,54 @@
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Current SDK version is 0.17.1
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Configure stats pid to 7882
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Loading settings from /home/ale/.config/wandb/settings
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Loading settings from /home/ale/TT_RLProject_2024/wandb/settings
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'TT_RLProject', 'entity': 'cm_datascience', 'root_dir': '/home/ale/TT_RLProject_2024', 'run_id': 'e8a7084g', 'sweep_param_path': '/home/ale/TT_RLProject_2024/wandb/sweep-4yh5hjzo/config-e8a7084g.yaml', 'sweep_id': '4yh5hjzo'}
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'Task_6/UDR_Training_Sweep.py', 'program_abspath': '/home/ale/TT_RLProject_2024/Task_6/UDR_Training_Sweep.py', 'program': '/home/ale/TT_RLProject_2024/Task_6/UDR_Training_Sweep.py'}
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_init.py:_log_setup():520] Logging user logs to /home/ale/TT_RLProject_2024/wandb/run-20240706_153325-e8a7084g/logs/debug.log
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_init.py:_log_setup():521] Logging internal logs to /home/ale/TT_RLProject_2024/wandb/run-20240706_153325-e8a7084g/logs/debug-internal.log
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_init.py:init():560] calling init triggers
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_init.py:init():568] wandb.init called with sweep_config: {'config_id': 2}
+config: {}
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_init.py:init():610] starting backend
+2024-07-06 15:33:25,674 INFO    Thread-8  :7882 [wandb_init.py:init():614] setting up manager
+2024-07-06 15:33:25,676 INFO    Thread-8  :7882 [backend.py:_multiprocessing_setup():107] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-07-06 15:33:25,677 INFO    Thread-8  :7882 [wandb_init.py:init():622] backend started and connected
+2024-07-06 15:33:25,680 INFO    Thread-8  :7882 [wandb_run.py:_config_callback():1382] config_cb None None {'config_id': 2}
+2024-07-06 15:33:25,681 INFO    Thread-8  :7882 [wandb_init.py:init():711] updated telemetry
+2024-07-06 15:33:25,690 INFO    Thread-8  :7882 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2024-07-06 15:33:26,057 INFO    Thread-8  :7882 [wandb_run.py:_on_init():2402] communicating current version
+2024-07-06 15:33:26,100 INFO    Thread-8  :7882 [wandb_run.py:_on_init():2411] got version response upgrade_message: "wandb version 0.17.4 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-07-06 15:33:26,101 INFO    Thread-8  :7882 [wandb_init.py:init():795] starting run threads in backend
+2024-07-06 15:33:26,449 INFO    Thread-8  :7882 [wandb_run.py:_console_start():2380] atexit reg
+2024-07-06 15:33:26,449 INFO    Thread-8  :7882 [wandb_run.py:_redirect():2235] redirect: wrap_raw
+2024-07-06 15:33:26,449 INFO    Thread-8  :7882 [wandb_run.py:_redirect():2300] Wrapping output streams.
+2024-07-06 15:33:26,450 INFO    Thread-8  :7882 [wandb_run.py:_redirect():2325] Redirects installed.
+2024-07-06 15:33:26,450 INFO    Thread-8  :7882 [wandb_init.py:init():838] run started, returning control to user process
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Current SDK version is 0.17.1
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Configure stats pid to 7882
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Loading settings from /home/ale/.config/wandb/settings
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Loading settings from /home/ale/TT_RLProject_2024/wandb/settings
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'TT_RLProject', 'entity': 'cm_datascience', 'root_dir': '/home/ale/TT_RLProject_2024', 'run_id': 'e8a7084g', 'sweep_param_path': '/home/ale/TT_RLProject_2024/wandb/sweep-4yh5hjzo/config-e8a7084g.yaml', 'sweep_id': '4yh5hjzo'}
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'Task_6/UDR_Training_Sweep.py', 'program_abspath': '/home/ale/TT_RLProject_2024/Task_6/UDR_Training_Sweep.py', 'program': '/home/ale/TT_RLProject_2024/Task_6/UDR_Training_Sweep.py'}
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_init.py:_log_setup():520] Logging user logs to /home/ale/TT_RLProject_2024/wandb/run-20240706_153326-e8a7084g/logs/debug.log
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_init.py:_log_setup():521] Logging internal logs to /home/ale/TT_RLProject_2024/wandb/run-20240706_153326-e8a7084g/logs/debug-internal.log
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_init.py:init():560] calling init triggers
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_init.py:init():568] wandb.init called with sweep_config: {'config_id': 2}
+config: {'policy_type': 'MlpPolicy', 'total_timesteps': 500000, 'env_name': 'CustomHopper-source-v0'}
+2024-07-06 15:33:26,454 INFO    Thread-8  :7882 [wandb_init.py:init():605] wandb.init() called when a run is still active
+2024-07-06 15:33:26,479 INFO    Thread-8  :7882 [wandb_run.py:_tensorboard_callback():1544] tensorboard callback: runs/e8a7084g/PPO_1, True
+2024-07-06 15:33:26,480 INFO    Thread-8  :7882 [wandb_watch.py:watch():51] Watching
+2024-07-06 15:33:26,480 INFO    Thread-8  :7882 [wandb_run.py:_config_callback():1382] config_cb None None {'algo': 'PPO', 'policy_class': "<class 'stable_baselines3.common.policies.ActorCriticPolicy'>", 'device': 'cuda', 'env': '<stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x7f8aa4b26790>', '_vec_normalize_env': 'None', 'verbose': 1, 'policy_kwargs': '{}', 'observation_space': 'Box([-inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf], [inf inf inf inf inf inf inf inf inf inf inf], (11,), float64)', 'action_space': 'Box([-1. -1. -1.], [1. 1. 1.], (3,), float32)', 'n_envs': 1, 'num_timesteps': 0, '_total_timesteps': 500000, '_num_timesteps_at_start': 0, 'seed': 'None', 'action_noise': 'None', 'start_time': 1720272806478765716, 'policy': 'ActorCriticPolicy(\n  (features_extractor): FlattenExtractor(\n    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (pi_features_extractor): FlattenExtractor(\n    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (vf_features_extractor): FlattenExtractor(\n    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (mlp_extractor): MlpExtractor(\n    (shared_net): Sequential()\n    (policy_net): Sequential(\n      (0): Linear(in_features=11, out_features=64, bias=True)\n      (1): Tanh()\n      (2): Linear(in_features=64, out_features=64, bias=True)\n      (3): Tanh()\n    )\n    (value_net): Sequential(\n      (0): Linear(in_features=11, out_features=64, bias=True)\n      (1): Tanh()\n      (2): Linear(in_features=64, out_features=64, bias=True)\n      (3): Tanh()\n    )\n  )\n  (action_net): Linear(in_features=64, out_features=3, bias=True)\n  (value_net): Linear(in_features=64, out_features=1, bias=True)\n)', 'learning_rate': 0.0003, 'tensorboard_log': 'runs/e8a7084g', 'lr_schedule': '<function constant_fn.<locals>.func at 0x7f8b607f6170>', '_last_obs': '[[ 1.25293203e+00 -3.12695340e-03 -1.90562523e-04  3.13795507e-03\n   4.23573565e-03 -2.06956825e-03  1.98816815e-03 -3.19967407e-03\n   2.41218927e-03  2.48615540e-04  1.80978358e-04]]', '_last_episode_starts': '[ True]', '_last_original_obs': 'None', '_episode_num': 0, 'use_sde': 'False', 'sde_sample_freq': -1, '_current_progress_remaining': 1, 'ep_info_buffer': 'deque([], maxlen=100)', 'ep_success_buffer': 'deque([], maxlen=100)', '_n_updates': 0, '_logger': '<stable_baselines3.common.logger.Logger object at 0x7f8b6096e3d0>', '_custom_logger': 'False', 'n_steps': 2048, 'gamma': 0.99, 'gae_lambda': 0.95, 'ent_coef': 0.0, 'vf_coef': 0.5, 'max_grad_norm': 0.5, 'rollout_buffer': '<stable_baselines3.common.buffers.RolloutBuffer object at 0x7f8b609e3550>', 'batch_size': 64, 'n_epochs': 10, 'clip_range': '<function constant_fn.<locals>.func at 0x7f8b60983cb0>', 'clip_range_vf': 'None', 'normalize_advantage': 'True', 'target_kl': 'None'}
+2024-07-06 15:47:22,950 INFO    Thread-8  :7882 [sb3.py:save_model():153] Saving model checkpoint to models/e8a7084g/model.zip
+2024-07-06 15:47:22,956 INFO    Thread-8  :7882 [wandb_run.py:_finish():2109] finishing run cm_datascience/TT_RLProject/e8a7084g
+2024-07-06 15:47:22,956 INFO    Thread-8  :7882 [wandb_run.py:_atexit_cleanup():2349] got exitcode: 0
+2024-07-06 15:47:22,956 INFO    Thread-8  :7882 [wandb_run.py:_restore():2332] restore
+2024-07-06 15:47:22,957 INFO    Thread-8  :7882 [wandb_run.py:_restore():2338] restore done
+2024-07-06 15:47:33,314 INFO    Thread-8  :7882 [wandb_run.py:_footer_history_summary_info():4008] rendering history
+2024-07-06 15:47:33,315 INFO    Thread-8  :7882 [wandb_run.py:_footer_history_summary_info():4040] rendering summary
+2024-07-06 15:47:33,317 INFO    Thread-8  :7882 [wandb_run.py:_footer_sync_info():3967] logging synced files
