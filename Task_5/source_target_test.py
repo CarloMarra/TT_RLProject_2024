@@ -11,6 +11,6 @@ model = PPO.load(model_path)
 env = gym.make('CustomHopper-target-v0')
 
 # Evaluate the policy
-mean_reward, std_reward = evaluate_policy(model, env, n_eval_episodes=50, render=False)
+mean_reward, std_reward = evaluate_policy(model, env, n_eval_episodes=50, render=True)
 
 print(f"Mean reward: {mean_reward} +/- {std_reward:.2f}")
