@@ -11,7 +11,7 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import DummyVecEnv
 
 
-from env.custom_hopper_args import CustomHopper, register_custom_hopper
+from rand_env.custom_hopper_args import CustomHopper, register_custom_hopper
 
 def main():
     # Define sweep configurations

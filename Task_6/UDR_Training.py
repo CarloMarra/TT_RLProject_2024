@@ -9,7 +9,7 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import DummyVecEnv
 from wandb.integration.sb3 import WandbCallback
 
-from env.custom_hopper_args import CustomHopper, register_custom_hopper
+from rand_env.custom_hopper_args import CustomHopper, register_custom_hopper
 
 def validate_percentage(value):
     fvalue = float(value)

@@ -15,7 +15,7 @@ def parse_args():
     Parse command-line arguments.
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('--n-episodes', default=25000, type=int, help='Number of training episodes')
+    parser.add_argument('--n-episodes', default=2500, type=int, help='Number of training episodes')
     parser.add_argument('--print-every', default=500, type=int, help='Print info every <> episodes')
     parser.add_argument('--device', default='cuda', type=str, help='Network device [cpu, cuda]')
     

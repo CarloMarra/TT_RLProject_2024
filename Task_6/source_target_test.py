@@ -3,13 +3,12 @@ from stable_baselines3 import PPO
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import DummyVecEnv
-from env.custom_hopper_args import CustomHopper, register_custom_hopper
+from env.custom_hopper import CustomHopper
 
 # Load the trained model
-model_path = '/home/ale/TT_RLProject_2024/Task_6/SavedModels_source/PPO_0_25_0_25_0_25.zip'
+model_path = '/home/ale/TT_RLProject_2024/Task_6/Models/time_comparison_rand.zip'
 model = PPO.load(model_path)
 
-register_custom_hopper()
 # Create the environment and wrap it with Monitor
 env = gym.make('CustomHopper-target-v0')
 

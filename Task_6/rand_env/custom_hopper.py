@@ -16,7 +16,7 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         MujocoEnv.__init__(self, 4)
         utils.EzPickle.__init__(self)
 
-        self.original_masses = np.copy(self.sim.model.body_mass[1:])    # Default link masses
+        self.original_masses = np.copy(self.sim.model.body_mass[2:])    # Default link masses
 
         if domain == 'source':  # Source environment has an imprecise torso mass (1kg shift)
             self.sim.model.body_mass[1] -= 1.0
@@ -29,15 +29,22 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
 
     def sample_parameters(self):
         """Sample masses according to a domain randomization distribution"""
+        mass_ranges = {
+            'thigh': (0.8 * self.original_masses[0], 1.2 * self.original_masses[0]),
+            'leg': (0.8 * self.original_masses[1], 1.2 * self.original_masses[1]),
+            'foot': (0.8 * self.original_masses[2], 1.2 * self.original_masses[2])
+        }
         
-        #
-        # TASK 6: implement domain randomization. Remember to sample new dynamics parameter
-        #         at the start of each training episode.
+
+        # Sample new masses uniformly within the specified ranges
+        new_masses = np.array([
+            np.random.uniform(*mass_ranges['thigh']),
+            np.random.uniform(*mass_ranges['leg']),
+            np.random.uniform(*mass_ranges['foot'])
+        ])
         
-        raise NotImplementedError()
-
-        return
-
+        return new_masses
+ 
 
     def get_parameters(self):
         """Get value of mass for each link"""
@@ -45,9 +52,9 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         return masses
 
 
-    def set_parameters(self, task):
+    def set_parameters(self, masses):
         """Set each hopper link's mass to a new value"""
-        self.sim.model.body_mass[1:] = task
+        self.sim.model.body_mass[2:5] = masses
 
 
     def step(self, a):
@@ -80,12 +87,13 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         ])
 
 
-    def reset_model(self):
+    def reset(self):
         """Reset the environment to a random initial state"""
+        self.set_random_parameters()  # Randomize environment parameters at the start of each episode
         qpos = self.init_qpos + self.np_random.uniform(low=-.005, high=.005, size=self.model.nq)
         qvel = self.init_qvel + self.np_random.uniform(low=-.005, high=.005, size=self.model.nv)
         self.set_state(qpos, qvel)
-        return self._get_obs()
+        return self._get_obs
 
 
     def viewer_setup(self):

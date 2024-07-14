@@ -6,9 +6,9 @@ from stable_baselines3 import PPO
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.logger import configure
 from stable_baselines3.common.callbacks import ProgressBarCallback, StopTrainingOnRewardThreshold, EvalCallback
-from env.custom_hopper_args import CustomHopper, register_custom_hopper
+from rand_env.custom_hopper_args import CustomHopper, register_custom_hopper
 
-from env.custom_hopper import CustomHopper
+from rand_env.custom_hopper import CustomHopper
 
 
 
@@ -17,13 +17,13 @@ def main():
     # Create the environment
     
     # Register environments with the specified ranges
-    register_custom_hopper(0.25, 0.25, 0.25)
+    register_custom_hopper(0.5, 0.5, 0.5)
     
     env = make_vec_env('CustomHopper-source-v0', n_envs=1)
     target_env = make_vec_env('CustomHopper-target-v0', n_envs=1)
 
     
-    callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=900, verbose=1)
+    callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=1800, verbose=1)
     eval_callback = EvalCallback(target_env, callback_on_new_best=callback_on_best, verbose=1)
         
     # Load the trained model

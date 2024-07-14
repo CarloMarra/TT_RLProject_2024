@@ -59,6 +59,8 @@
        - [x] UDR: 0.10
        - [ ] UDR: 0.25
        - [ ] UDR: 0.50 
+     - Stopping training because the mean reward 1330.87  is above the threshold 1200
+     - Elapsed time: 163.82082986831665 seconds
 
 ### Testing
    - [x] UDR Source [0.1, 0.1, 0.1] $\rightarrow$ Target Test (**New Lower Bound**): 1557.972 +/- 204.390
