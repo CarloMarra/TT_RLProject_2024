@@ -13,15 +13,9 @@ from env.custom_hopper import CustomHopper
 def main():
     #n_envs = 4
     vec_env = make_vec_env('CustomHopper-source-v0', n_envs=1)
-    #env = make_env()
 
-    #tmp_path = "/home/ale/TT_RLProject_2024/Task_4/"
-    #set up logger
-    #new_logger = configure(tmp_path, ["csv"])
 
     model = PPO("MlpPolicy", learning_rate=0.0003, env=vec_env, verbose=1)
-    #Set new logger
-    #model.set_logger(new_logger)
         
     # Use a very large number of timesteps to ensure the callback determines stopping
     model.learn(total_timesteps=int(500_000), progress_bar=True)
