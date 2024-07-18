@@ -43,47 +43,7 @@ PPO is a state-of-the-art RL algorithm designed to improve policy stability and 
 
 PPO outperformed REINFORCE and A2C in solving the OpenAI Gym Hopper problem. By employing UDR and DROPO methods, we improved generalization and minimized the sim-to-real gap, highlighting the potential of these approaches in real-world applications.
 
-## Repository Structure
-
 ```
-TT_RLProject_2024/
-├── algorithms/
-│   ├── REINFORCE.py
-│   ├── A2C.py
-│   └── PPO.py
-├── environments/
-│   ├── source/
-│   └── target/
-├── data/
-├── results/
-│   ├── REINFORCE/
-│   ├── A2C/
-│   └── PPO/
-└── README.md
-```
-
-## Usage
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/CarloMarra/TT_RLProject_2024.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd TT_RLProject_2024
-   ```
-3. Run the desired algorithm script:
-   ```
-   python algorithms/REINFORCE.py
-   ```
-   or
-   ```
-   python algorithms/A2C.py
-   ```
-   or
-   ```
-   python algorithms/PPO.py
-   ```
 
 ## References
 
