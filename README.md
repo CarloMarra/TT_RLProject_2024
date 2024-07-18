@@ -52,12 +52,19 @@ PPO is a state-of-the-art RL algorithm designed to improve policy stability and 
 
 PPO outperformed REINFORCE and A2C in solving the OpenAI Gym Hopper problem. By employing UDR and DROPO methods, we improved generalization and minimized the sim-to-real gap, highlighting the potential of these approaches in real-world applications.
 
-```
 
 ## References
 
-- Sutton, R. S., & Barto, A. G. (2018). Reinforcement Learning: An Introduction.
-- Schulman, J., et al. (2017). Proximal Policy Optimization Algorithms.
+- Lukas Biewald. Experiment tracking with weights and biases, 2020. Software available from wandb.com.
+- Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman, Jie Tang, and Wojciech Zaremba. Openai gym, 2016.
+- DeepMind. Specification gaming: The flip side of ai ingenuity. Accessed: 2024-07-14.
+- Nikolaus Hansen. The cma evolution strategy: A tutorial, 2023.
+- Antonin Raffin, Ashley Hill, Adam Gleave, Anssi Kanervisto, Maximilian Ernestus, and Noah Dormann. Stable-baselines3: Reliable reinforcement learning implementations. Journal of Machine Learning Research, 22(268):1–8, 2021.
+- John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017. OpenAI.
+- Richard S. Sutton and Andrew G. Barto. Actor critic methods. In Reinforcement Learning: An Introduction, Adaptive computation and machine learning series, chapter 13.5. The MIT Press, Cambridge, MA, second edition, 2018. Accessed: 2024-07-14.
+- Richard S. Sutton and Andrew G. Barto. Reinforce: Monte carlo policy gradient. In Reinforcement Learning: An Introduction, Adaptive computation and machine learning series, chapter 13.3-13.4. The MIT Press, Cambridge, MA, second edition, 2018. Accessed: 2024-07-14.
+- Daniel Takeshi. Going deeper into reinforcement learning: Fundamentals of policy gradients, 2017. Accessed: 2024-07-14.
+- Gabriele Tiboni, Karol Arndt, and Ville Kyrki. Dropo: Sim-to-real transfer with offline domain randomization. Robotics and Autonomous Systems, page 104432, 2023.
 
 ## License
 
