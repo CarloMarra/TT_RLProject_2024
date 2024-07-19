@@ -66,6 +66,3 @@ PPO outperformed REINFORCE and A2C in solving the OpenAI Gym Hopper problem. By 
 - Daniel Takeshi. Going deeper into reinforcement learning: Fundamentals of policy gradients, 2017. Accessed: 2024-07-14.
 - Gabriele Tiboni, Karol Arndt, and Ville Kyrki. Dropo: Sim-to-real transfer with offline domain randomization. Robotics and Autonomous Systems, page 104432, 2023.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
