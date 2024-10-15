@@ -1,6 +1,8 @@
 
 # Bridging the Sim-to-Real Gap in Reinforcement Learning: A Comparative Analysis of Algorithms on the OpenAI Gym Hopper Problem
 
+The complete report can be found [here](https://github.com/CarloMarra/TT_RLProject_2024/blob/main/s334220_s331438_s328131_MARRA_PELLEGRINO_VALENTI_v1.1.pdf).
+
 ## Overview
 
 This project presents an introductory analysis of reinforcement learning (RL) algorithms on the OpenAI Gym Hopper problem, focusing on addressing the sim-to-real gap. We implemented and evaluated various RL algorithms, including REINFORCE, Actor-Critic (A2C), and Proximal Policy Optimization (PPO). Our results indicate that while REINFORCE and A2C struggled to solve the Hopper task, PPO demonstrated effective performance. We further enhanced generalization and performance using Uniform Domain Randomization (UDR) and the DROPO off-policy method to identify optimal environment parameters.
@@ -14,8 +16,6 @@ This project presents an introductory analysis of reinforcement learning (RL) al
 ## Abstract
 
 This project focuses on the evaluation of various reinforcement learning algorithms on the OpenAI Gym Hopper problem. Our results show that while REINFORCE and A2C had limited success, PPO proved to be effective. We also applied Uniform Domain Randomization (UDR) to improve generalization and used the DROPO off-policy method to identify optimal environment parameters, effectively minimizing the sim-to-real gap.
-
-The complete report can be found [here](https://github.com/CarloMarra/TT_RLProject_2024/blob/main/s334220_s331438_s328131_MARRA_PELLEGRINO_VALENTI_v1.1.pdf).
 
 ## Introduction
 
