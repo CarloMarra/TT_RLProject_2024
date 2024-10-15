@@ -15,6 +15,8 @@ This project presents an introductory analysis of reinforcement learning (RL) al
 
 This project focuses on the evaluation of various reinforcement learning algorithms on the OpenAI Gym Hopper problem. Our results show that while REINFORCE and A2C had limited success, PPO proved to be effective. We also applied Uniform Domain Randomization (UDR) to improve generalization and used the DROPO off-policy method to identify optimal environment parameters, effectively minimizing the sim-to-real gap.
 
+The complete report can be found [here](https://github.com/CarloMarra/TT_RLProject_2024/blob/main/s334220_s331438_s328131_MARRA_PELLEGRINO_VALENTI_v1.1.pdf).
+
 ## Introduction
 
 Reinforcement Learning (RL) is a machine learning paradigm where an agent learns to make decisions by interacting with an environment to maximize cumulative rewards. In our project, we utilized custom Hopper environments based on the original OpenAI Gym Hopper. We created two custom environments: "source" for training and "target" for evaluation, with the key difference being the mass of the torso.
